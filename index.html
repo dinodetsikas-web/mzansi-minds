@@ -1,0 +1,1370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Mzansi Minds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Lexend:wght@400;500;600&display=swap">
+<style>
+/* Layout: one centred column (max 64rem), navy header band, cards only for the working surface (question, Mimi, banners). */
+:root {
+  --navy: #14283E; --gold: #F2B544; --cream: #F4F0E7; --white: #FFFFFF;
+  --bg: #F4F0E7; --surface: #FFFFFF; --sunk: #EBE5D7; --ink: #14283E; --muted: #55627A; --line: #DAD2C1;
+  --band: #14283E; --band-ink: #F4F0E7; --accent: #F2B544; --accent-ink: #14283E; --accent-soft: #FBE7BC;
+  --btn2-bg: #14283E; --btn2-ink: #FFFFFF; --focus: #1F5FA8;
+  --ok: #24704F; --ok-bg: #DDF0E6; --prac: #2A5D9A; --prac-bg: #DFE9F6; --gap: #A8432B; --gap-bg: #F7E2DB; --na: #5F6672; --na-bg: #E7E3DA;
+  --stripe: #F2B54433;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Lexend", "Segoe UI", system-ui, sans-serif;
+  --r: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C1826; --surface: #14283E; --sunk: #102133; --ink: #F4F0E7; --muted: #A9B5C4; --line: #2B425C;
+    --band: #08111C; --band-ink: #F4F0E7; --accent: #F2B544; --accent-ink: #14283E; --accent-soft: #3A3220;
+    --btn2-bg: #F4F0E7; --btn2-ink: #14283E; --focus: #F2B544;
+    --ok: #74D0A4; --ok-bg: #163829; --prac: #96BDF0; --prac-bg: #1A3352; --gap: #F2A18A; --gap-bg: #44241C; --na: #B0B6BF; --na-bg: #233243;
+    --stripe: #F2B54422; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0C1826; --surface: #14283E; --sunk: #102133; --ink: #F4F0E7; --muted: #A9B5C4; --line: #2B425C;
+  --band: #08111C; --band-ink: #F4F0E7; --accent: #F2B544; --accent-ink: #14283E; --accent-soft: #3A3220;
+  --btn2-bg: #F4F0E7; --btn2-ink: #14283E; --focus: #F2B544;
+  --ok: #74D0A4; --ok-bg: #163829; --prac: #96BDF0; --prac-bg: #1A3352; --gap: #F2A18A; --gap-bg: #44241C; --na: #B0B6BF; --na-bg: #233243;
+  --stripe: #F2B54422; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body { color: var(--ink); font-family: var(--f-body); font-size: 1rem; line-height: 1.55; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.15; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 800; }
+h2 { font-size: clamp(1.35rem, 3.2vw, 1.75rem); font-weight: 700; }
+h3 { font-size: 1.1rem; font-weight: 700; }
+p { margin: 0; max-width: 65ch; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+.band { background: var(--band); color: var(--band-ink); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; }
+.band-inner { max-width: 64rem; margin: 0 auto; padding: 0.6rem 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
+.brand { display: flex; align-items: center; gap: 0.55rem; font-family: var(--f-display); font-weight: 800; font-size: 1.15rem; background: none; border: 0; color: inherit; cursor: pointer; padding: 0.25rem 0; }
+.mark { width: 30px; height: 30px; border-radius: 50%; background: var(--gold); color: var(--navy); display: grid; place-items: center; font-weight: 800; font-size: 0.95rem; flex: none; }
+.nav { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-left: auto; }
+.nav button { background: none; border: 0; color: var(--band-ink); font: 500 0.88rem var(--f-body); padding: 0.45rem 0.65rem; border-radius: 999px; cursor: pointer; min-height: 40px; opacity: 0.85; }
+.nav button:hover { opacity: 1; background: #ffffff14; }
+.nav button[aria-current="page"] { background: var(--gold); color: var(--navy); opacity: 1; }
+.presenter-flag { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); }
+
+main { max-width: 64rem; margin: 0 auto; padding-inline: 16px; padding-block: 1.75rem 3rem; display: grid; gap: 2rem; }
+main:focus { outline: none; }
+footer { max-width: 64rem; margin: 0 auto; padding-inline: 16px; padding-block: 1.25rem 2rem; color: var(--muted); font-size: 0.82rem; border-top: 1px solid var(--line); }
+
+.stack { display: grid; gap: 1rem; }
+.stack-s { display: grid; gap: 0.5rem; }
+.row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+.eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.lead { font-size: 1.2rem; color: var(--muted); }
+.muted { color: var(--muted); }
+.small { font-size: 0.86rem; }
+
+.btn { font: 600 1rem var(--f-body); border-radius: 999px; padding: 0.7rem 1.25rem; min-height: 48px; border: 2px solid transparent; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; }
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { filter: brightness(1.05); }
+.btn-dark { background: var(--btn2-bg); color: var(--btn2-ink); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--ink); }
+.btn-danger { background: var(--gap); color: var(--surface); }
+.btn-s { min-height: 40px; padding: 0.45rem 0.9rem; font-size: 0.9rem; }
+.btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+
+/* Welcome */
+.hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; }
+.hero > * { min-width: 0; }
+.hero h1 span { display: block; color: var(--muted); font-size: 0.55em; font-weight: 600; margin-top: 0.4rem; }
+.promise { font-family: var(--f-display); font-weight: 700; font-size: 1.15rem; border-left: 4px solid var(--accent); padding-left: 0.75rem; }
+.hero-fig { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 1.25rem; display: grid; gap: 0.75rem; }
+.hero-fig figcaption { font-size: 0.92rem; color: var(--muted); }
+.hero-fig .sum { font-family: var(--f-display); font-size: 1.6rem; font-weight: 800; }
+.steps3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.steps3 > div { display: grid; gap: 0.35rem; align-content: start; min-width: 0; }
+.stepnum { font-family: var(--f-display); font-weight: 800; color: var(--accent-ink); background: var(--accent); width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; }
+.real-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem 1.5rem; padding: 0; margin: 0; list-style: none; }
+.real-list li { display: flex; gap: 0.5rem; min-width: 0; }
+.real-list li::before { content: "✓"; color: var(--ok); font-weight: 700; }
+.section-head { display: grid; gap: 0.35rem; }
+
+/* Learner cards */
+.learners { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.lcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 1.1rem; display: grid; gap: 0.6rem; align-content: start; min-width: 0; }
+.lcard .name { display: flex; align-items: center; gap: 0.6rem; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--sunk); border: 2px solid var(--line); display: grid; place-items: center; font-family: var(--f-display); font-weight: 800; flex: none; }
+.tag { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 999px; background: var(--sunk); color: var(--muted); }
+
+/* Question */
+.qcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: clamp(1rem, 3vw, 1.75rem); display: grid; gap: 1.1rem; }
+.qmeta { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: space-between; }
+.progress { font-variant-numeric: tabular-nums; font-size: 0.9rem; color: var(--muted); }
+.why { font-size: 0.92rem; background: var(--sunk); border-radius: 10px; padding: 0.6rem 0.8rem; }
+.qtext { font-family: var(--f-display); font-size: clamp(1.3rem, 3.5vw, 1.7rem); font-weight: 700; line-height: 1.3; max-width: 34ch; }
+.visual { display: flex; justify-content: flex-start; }
+.visual svg { max-width: 100%; height: auto; }
+.answer-row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: stretch; }
+.answer-row input { font: 600 1.35rem var(--f-body); padding: 0.55rem 0.85rem; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); color: var(--ink); width: 11rem; max-width: 100%; min-height: 52px; font-variant-numeric: tabular-nums; }
+.answer-row input:focus { border-color: var(--focus); outline: none; }
+.choices { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.choice { font: 600 1.15rem var(--f-body); padding: 0.6rem 1.1rem; min-height: 52px; min-width: 4.5rem; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; }
+.choice[aria-pressed="true"] { border-color: var(--ink); background: var(--accent-soft); }
+.feedback { border-radius: 12px; padding: 0.85rem 1rem; display: grid; gap: 0.45rem; }
+.feedback.good { background: var(--ok-bg); color: var(--ink); border-left: 5px solid var(--ok); }
+.feedback.notyet { background: var(--gap-bg); color: var(--ink); border-left: 5px solid var(--gap); }
+.feedback.info { background: var(--prac-bg); color: var(--ink); border-left: 5px solid var(--prac); }
+.hintbox { background: var(--accent-soft); border-radius: 12px; padding: 0.75rem 0.9rem; font-size: 0.95rem; }
+details summary { cursor: pointer; font-weight: 600; }
+.cue { border: 2px dashed var(--accent); border-radius: 12px; padding: 0.6rem 0.85rem; font-size: 0.9rem; background: var(--stripe); }
+.cue b { font-variant-numeric: tabular-nums; }
+
+/* Status pills */
+.pill { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; white-space: nowrap; }
+.pill::before { font-size: 0.75rem; }
+.s-demonstrated { background: var(--ok-bg); color: var(--ok); }
+.s-demonstrated::before { content: "●"; }
+.s-practising { background: var(--prac-bg); color: var(--prac); }
+.s-practising::before { content: "◐"; }
+.s-gap { background: var(--gap-bg); color: var(--gap); }
+.s-gap::before { content: "▲"; }
+.s-not_assessed { background: var(--na-bg); color: var(--na); }
+.s-not_assessed::before { content: "○"; }
+
+/* Skill ladder */
+.ladder { display: grid; gap: 0; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: var(--surface); }
+.rung { display: grid; grid-template-columns: 1fr auto; gap: 0.25rem 1rem; padding: 0.75rem 1rem; border-top: 1px solid var(--line); align-items: center; }
+.rung:first-child { border-top: 0; }
+.rung .meta { grid-column: 1 / -1; font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rung.focus { background: var(--accent-soft); }
+.rung .nm { font-weight: 600; min-width: 0; }
+.rung .nm small { display: block; font-weight: 400; color: var(--muted); font-size: 0.78rem; }
+
+.rec { background: var(--btn2-bg); color: var(--btn2-ink); border-radius: var(--r); padding: clamp(1rem, 3vw, 1.6rem); display: grid; gap: 0.75rem; }
+.rec .eyebrow { color: inherit; opacity: 0.75; }
+.rec ul { margin: 0; padding-left: 1.1rem; font-size: 0.92rem; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+.two > * { min-width: 0; }
+
+/* Mimi */
+.mimi { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+.chat { display: grid; gap: 0.75rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 1rem; max-height: 34rem; overflow-y: auto; }
+.msg { display: flex; gap: 0.6rem; align-items: flex-start; }
+.msg .bubble { background: var(--sunk); border-radius: 4px 14px 14px 14px; padding: 0.65rem 0.85rem; display: grid; gap: 0.5rem; min-width: 0; }
+.msg.me { justify-content: flex-end; }
+.msg.me .bubble { background: var(--accent-soft); border-radius: 14px 4px 14px 14px; }
+.msg .label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.draft { border: 1px dashed var(--gap); border-radius: 8px; padding: 0.35rem 0.55rem; font-size: 0.78rem; color: var(--gap); }
+.tools { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+/* Passport */
+.passport-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; align-items: end; border-bottom: 3px solid var(--ink); padding-bottom: 1rem; }
+.stamp { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: 2px solid var(--ok); color: var(--ok); padding: 0.25rem 0.6rem; border-radius: 8px; transform: rotate(-2deg); }
+.tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tabs button { font: 600 0.9rem var(--f-body); padding: 0.45rem 0.9rem; border-radius: 999px; border: 2px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; min-height: 40px; }
+.tabs button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+.timeline li { display: grid; grid-template-columns: 4.5rem 1fr; gap: 0.75rem; padding: 0.55rem 0; border-top: 1px solid var(--line); font-size: 0.92rem; }
+.timeline time { color: var(--muted); font-variant-numeric: tabular-nums; }
+.timeline li > span { min-width: 0; }
+
+/* Tables */
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 0.55rem 0.75rem; border-top: 1px solid var(--line); vertical-align: middle; }
+thead th { border-top: 0; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); font-weight: 600; background: var(--sunk); }
+.heat td.c { text-align: center; padding: 0.35rem; }
+.heat .cell { display: inline-block; width: 1.9rem; height: 1.6rem; border-radius: 5px; line-height: 1.6rem; font-size: 0.75rem; }
+.heat th:first-child, .heat td:first-child { position: sticky; left: 0; background: var(--surface); }
+.heat thead th:first-child { background: var(--sunk); }
+
+.sample-banner { background: repeating-linear-gradient(135deg, var(--stripe) 0 12px, transparent 12px 24px), var(--surface); border: 2px solid var(--accent); border-radius: var(--r); padding: 0.9rem 1rem; display: grid; gap: 0.3rem; }
+.sample-banner strong { font-family: var(--f-display); font-size: 1.1rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.bars { display: grid; gap: 0.6rem; }
+.barrow { display: grid; grid-template-columns: 11rem 1fr 3rem; gap: 0.75rem; align-items: center; font-size: 0.9rem; }
+.barrow > span { min-width: 0; }
+.track { height: 0.9rem; border-radius: 999px; background: var(--sunk); overflow: hidden; display: flex; }
+.track i { display: block; height: 100%; }
+
+/* Presenter */
+.timer { font-family: var(--f-display); font-size: clamp(2.5rem, 9vw, 4rem); font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1; }
+.timer.late { color: var(--gap); }
+.runsheet { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; counter-reset: s; }
+.runsheet li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 0.85rem 1rem; display: grid; grid-template-columns: 2.2rem 1fr auto; gap: 0.75rem; align-items: start; }
+.runsheet li > div { min-width: 0; }
+.runsheet .t { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 0.8rem; }
+.runsheet .say { font-style: italic; font-size: 0.92rem; color: var(--muted); }
+.confirm { background: var(--gap-bg); border-radius: 12px; padding: 0.85rem 1rem; display: grid; gap: 0.6rem; }
+.switch { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; font-weight: 500; }
+.switch input { width: 1.3rem; height: 1.3rem; accent-color: var(--navy); }
+select { font: 500 1rem var(--f-body); padding: 0.55rem 0.75rem; border-radius: 10px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); min-height: 46px; max-width: 100%; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 1.1rem; display: grid; gap: 0.75rem; }
+
+/* SVG visuals */
+.v-box { fill: var(--surface); stroke: var(--line); stroke-width: 2; }
+.v-box.on { fill: var(--accent-soft); stroke: var(--accent); }
+.v-dot { fill: var(--ink); }
+.v-part { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+.v-part.on { fill: var(--accent); }
+.v-text { fill: var(--muted); font: 600 13px var(--f-body); }
+
+@media (max-width: 760px) {
+  .hero, .two, .mimi { grid-template-columns: 1fr; }
+  .steps3 { grid-template-columns: 1fr; }
+  .learners, .real-list { grid-template-columns: 1fr; }
+  .barrow { grid-template-columns: 1fr 3rem; }
+  .barrow .track { grid-column: 1 / -1; grid-row: 2; }
+  .nav { margin-left: 0; width: 100%; }
+  .runsheet li { grid-template-columns: 2rem 1fr; }
+  .runsheet li .go { grid-column: 2; }
+}
+.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.track i::before { content: none; }
+.heat .cell::before { font-size: 0.8rem; }
+
+</style>
+</head>
+<body>
+
+<header class="band"><div class="band-inner">
+  <button class="brand" data-act="go" data-v="welcome" aria-label="Mzansi Minds home"><span class="mark" aria-hidden="true">M</span>Mzansi Minds</button>
+  <span class="presenter-flag" id="pflag" hidden>Presenter cues on</span>
+  <nav class="nav" id="nav" aria-label="Main"></nav>
+</div></header>
+<main id="app" tabindex="-1"></main>
+<footer>Mzansi Minds · working prototype for the Trinityhouse Little Falls SDG 4 campaign · fictional learners only · nothing leaves this device · "Don't Promise Tomorrow. Build It Today."</footer>
+<script>
+/* Mzansi Minds engine: pure, deterministic functions. No AI, no network. */
+(function (root) {
+  'use strict';
+
+  var SKILLS = {
+    PV:   { id: 'PV',   name: 'Place value',                      prereqs: [],             order: 1 },
+    MUL:  { id: 'MUL',  name: 'Multiplication',                   prereqs: ['PV'],         order: 2 },
+    DIV:  { id: 'DIV',  name: 'Division and equal sharing',       prereqs: ['MUL'],        order: 3 },
+    FRAC: { id: 'FRAC', name: 'What a fraction means',            prereqs: ['DIV'],        order: 4 },
+    FOQ:  { id: 'FOQ',  name: 'Fraction of an amount',            prereqs: ['DIV', 'FRAC'], order: 5 },
+    EQV:  { id: 'EQV',  name: 'Equivalent and comparing fractions', prereqs: ['FRAC'],     order: 6, stretch: true },
+    WORD: { id: 'WORD', name: 'Fraction word problems',           prereqs: ['FOQ'],        order: 7, stretch: true }
+  };
+  var CHAIN = ['PV', 'MUL', 'DIV', 'FRAC', 'FOQ'];
+  var STRETCH = ['EQV', 'WORD'];
+  var ALL = CHAIN.concat(STRETCH);
+  var GOAL = 'FOQ';
+  var MAX_QUESTIONS = 12;
+
+  var AREA = {
+    PV: 'Whole numbers: place value',
+    MUL: 'Whole numbers: multiplication',
+    DIV: 'Whole numbers: division',
+    FRAC: 'Common fractions',
+    FOQ: 'Common fractions: fractions of whole numbers',
+    EQV: 'Common fractions: equivalent fractions and comparing',
+    WORD: 'Common fractions: solving problems in context'
+  };
+  function caps(skill) {
+    return {
+      status: 'provisional',
+      area: 'Grade 5 · Numbers, Operations and Relationships · ' + AREA[skill],
+      note: 'Developer mapping. Not yet checked against the official CAPS document.'
+    };
+  }
+  var REVIEW = 'Answer checked by automated test; teacher review pending';
+
+  function item(o) {
+    o.grade = 5;
+    o.language = 'en';
+    o.topic = SKILLS[o.skillId].name;
+    o.prerequisiteSkillIds = SKILLS[o.skillId].prereqs.slice();
+    o.capsReference = caps(o.skillId);
+    o.reviewStatus = REVIEW;
+    o.acceptedAnswers = o.answerType === 'choice' ? [o.answer]
+      : o.answerType === 'fraction' ? [o.answer[0] + '/' + o.answer[1], 'any equivalent fraction']
+      : [String(o.answer)];
+    o.misconceptions = o.misconceptions || [];
+    return o;
+  }
+
+  /* Diagnostic items: order inside each skill is easiest first. */
+  var ITEMS = [
+    item({ id: 'dfoq1', use: 'diagnostic', skillId: 'FOQ', difficulty: 2, answerType: 'number', answer: 15,
+      questionText: 'What is ¾ of 20?',
+      hints: ['¾ means split into 4 equal groups and take 3 of them. How many are in each group?'],
+      workedSolution: 'Split 20 into 4 equal groups of 5. Take 3 groups: 5 + 5 + 5 = 15.' }),
+    item({ id: 'dfoq2', use: 'diagnostic', skillId: 'FOQ', difficulty: 1, answerType: 'number', answer: 5,
+      questionText: 'What is ⅓ of 15?',
+      hints: ['⅓ means 3 equal groups. Share 15 into 3 equal groups.'],
+      workedSolution: '15 ÷ 3 = 5, so ⅓ of 15 is 5.' }),
+    item({ id: 'dfoq3', use: 'diagnostic', skillId: 'FOQ', difficulty: 3, answerType: 'number', answer: 12,
+      questionText: 'What is ⅖ of R30?',
+      hints: ['Find ⅕ of R30 first, then take 2 of those parts.'],
+      workedSolution: '⅕ of 30 is 30 ÷ 5 = 6. So ⅖ is 2 × 6 = R12.' }),
+
+    item({ id: 'ddiv1', use: 'diagnostic', skillId: 'DIV', difficulty: 1, answerType: 'number', answer: 6,
+      questionText: '24 sweets are shared equally among 4 friends. How many sweets does each friend get?',
+      hints: ['Hand out one sweet to each friend at a time until all 24 are gone.'],
+      workedSolution: '24 ÷ 4 = 6, because 4 × 6 = 24.' }),
+    item({ id: 'ddiv2', use: 'diagnostic', skillId: 'DIV', difficulty: 1, answerType: 'number', answer: 4,
+      questionText: '36 ÷ 9 = ?',
+      hints: ['Think: 9 × ? = 36.'],
+      workedSolution: '36 ÷ 9 = 4, because 9 × 4 = 36.' }),
+    item({ id: 'ddiv3', use: 'diagnostic', skillId: 'DIV', difficulty: 2, answerType: 'number', answer: 9,
+      questionText: 'A R72 bill is split equally between 8 friends. How much does each friend pay, in rand?',
+      hints: ['Think: 8 × ? = 72.'],
+      workedSolution: '72 ÷ 8 = 9, because 8 × 9 = 72. Each friend pays R9.' }),
+
+    item({ id: 'dmul1', use: 'diagnostic', skillId: 'MUL', difficulty: 1, answerType: 'number', answer: 56,
+      questionText: '7 × 8 = ?',
+      hints: ['7 × 4 = 28. 7 × 8 is double that.'],
+      workedSolution: '7 × 8 = 56. Check: 7 × 4 = 28, and double 28 is 56.' }),
+    item({ id: 'dmul2', use: 'diagnostic', skillId: 'MUL', difficulty: 2, answerType: 'number', answer: 60,
+      questionText: 'A minibus taxi carries 15 passengers. How many passengers fit in 4 full taxis?',
+      hints: ['4 groups of 15. Try 4 × 10 and 4 × 5, then add.'],
+      workedSolution: '4 × 15 = 60, because 4 × 10 = 40 and 4 × 5 = 20, and 40 + 20 = 60.' }),
+    item({ id: 'dmul3', use: 'diagnostic', skillId: 'MUL', difficulty: 2, answerType: 'number', answer: 180,
+      questionText: 'Eggs come in trays of 30. How many eggs are in 6 trays?',
+      hints: ['6 × 30 is the same as 6 × 3 tens.'],
+      workedSolution: '6 × 30 = 6 × 3 tens = 18 tens = 180.' }),
+
+    item({ id: 'dpv1', use: 'diagnostic', skillId: 'PV', difficulty: 1, answerType: 'number', answer: 300,
+      questionText: 'In the number 4 352, what is the value of the digit 3?',
+      hints: ['Name the places from the right: units, tens, hundreds, thousands.'],
+      workedSolution: 'The 3 is in the hundreds place, so it is worth 300.' }),
+    item({ id: 'dpv2', use: 'diagnostic', skillId: 'PV', difficulty: 1, answerType: 'number', answer: 6047,
+      questionText: 'Write this as a number: 6 thousands, 0 hundreds, 4 tens and 7 units.',
+      hints: ['Write one digit for each place. There are no hundreds, so that digit is 0.'],
+      workedSolution: '6 000 + 0 + 40 + 7 = 6 047.' }),
+    item({ id: 'dpv3', use: 'diagnostic', skillId: 'PV', difficulty: 2, answerType: 'number', answer: 9459,
+      questionText: 'What number is 1 000 more than 8 459?',
+      hints: ['Only the thousands digit changes.'],
+      workedSolution: '8 thousands becomes 9 thousands, so the answer is 9 459.' }),
+
+    item({ id: 'dfrac1', use: 'diagnostic', skillId: 'FRAC', difficulty: 1, answerType: 'fraction', answer: [3, 8],
+      questionText: 'A pizza is cut into 8 equal slices. Lerato eats 3 slices. What fraction of the pizza did she eat?',
+      visual: { type: 'pie', parts: 8, shaded: 3, label: 'Pizza cut into 8 equal slices, 3 shaded' },
+      hints: ['The bottom number is how many equal slices there are altogether.'],
+      workedSolution: 'There are 8 equal slices (the bottom number) and she ate 3 (the top number), so 3/8.' }),
+    item({ id: 'dfrac2', use: 'diagnostic', skillId: 'FRAC', difficulty: 1, answerType: 'choice', answer: '2/5',
+      choices: ['2/5', '3/5', '2/3', '5/2'],
+      questionText: 'What fraction of this bar is shaded?',
+      visual: { type: 'bar', parts: 5, shaded: 2, label: 'Bar with 5 equal parts, 2 shaded' },
+      hints: ['Count all the equal parts first. That is the bottom number.'],
+      workedSolution: 'The bar has 5 equal parts and 2 are shaded, so 2/5 is shaded.' }),
+    item({ id: 'dfrac3', use: 'diagnostic', skillId: 'FRAC', difficulty: 2, answerType: 'fraction', answer: [1, 4],
+      questionText: 'A loaf of bread is cut into 4 equal pieces. What fraction of the loaf is one piece?',
+      hints: ['How many equal pieces is the whole loaf? You have 1 of them.'],
+      workedSolution: 'The loaf has 4 equal pieces and you have 1, so 1/4.' }),
+
+    item({ id: 'deqv1', use: 'diagnostic', skillId: 'EQV', difficulty: 3, answerType: 'number', answer: 4,
+      questionText: 'Fill in the missing number: 1/2 = ?/8',
+      hints: ['What do you multiply 2 by to get 8? Do the same to the top.'],
+      workedSolution: '2 × 4 = 8, so multiply the top by 4 too: 1 × 4 = 4. 1/2 = 4/8.' }),
+    item({ id: 'deqv2', use: 'diagnostic', skillId: 'EQV', difficulty: 3, answerType: 'choice', answer: '2/3',
+      choices: ['2/3', '3/5', 'They are the same'],
+      questionText: 'Which fraction is bigger: 2/3 or 3/5?',
+      hints: ['Write both as fifteenths.'],
+      workedSolution: '2/3 = 10/15 and 3/5 = 9/15, so 2/3 is bigger.' }),
+    item({ id: 'dword1', use: 'diagnostic', skillId: 'WORD', difficulty: 3, answerType: 'number', answer: 20,
+      questionText: 'Mrs Dlamini has R60. She spends ⅔ of it at the spaza shop. How much money does she have left, in rand?',
+      hints: ['Find ⅓ of R60 first. Then work out what she spends and what is left.'],
+      workedSolution: '⅓ of 60 is 20, so ⅔ is R40. R60 − R40 = R20 left.' }),
+    item({ id: 'dword2', use: 'diagnostic', skillId: 'WORD', difficulty: 3, answerType: 'number', answer: 8,
+      questionText: 'Thandi is running a 20 km fun run. She has run ⅗ of the distance. How many kilometres does she still have to run?',
+      hints: ['Find ⅕ of 20 km, then ⅗. Then work out what is left.'],
+      workedSolution: '⅕ of 20 is 4, so ⅗ is 12 km. 20 − 12 = 8 km still to run.' }),
+
+    /* Practice items used by Mimi. */
+    item({ id: 'p-div1', use: 'practice', skillId: 'DIV', difficulty: 1, answerType: 'number', answer: 8,
+      questionText: 'Gogo shares R40 equally among her 5 grandchildren. How much does each child get, in rand?',
+      hints: ['Every grandchild gets the same amount. Picture handing out R1 to each of the 5 children, over and over, until the R40 runs out.',
+              'Think backwards: 5 × ? = 40.'],
+      workedSolution: '40 ÷ 5 = 8, because 5 × 8 = 40. Each grandchild gets R8.',
+      misconceptions: [
+        { value: 35, msg: 'It looks like you took 5 away from 40. Sharing means splitting the R40 into 5 equal parts.' },
+        { value: 45, msg: 'It looks like you added 40 and 5. When we share, each person gets less than the total.' },
+        { value: 200, msg: 'It looks like you multiplied. Sharing makes the amount for each person smaller, so we divide.' }] }),
+    item({ id: 'p-div2', use: 'practice', skillId: 'DIV', difficulty: 1, answerType: 'number', answer: 6,
+      questionText: '18 oranges are packed equally into 3 bags. How many oranges go in each bag?',
+      hints: ['Put one orange in each bag, then another, until all 18 are packed.', 'Think: 3 × ? = 18.'],
+      workedSolution: '18 ÷ 3 = 6, because 3 × 6 = 18.',
+      misconceptions: [
+        { value: 15, msg: 'It looks like you took 3 away from 18. We need 3 equal bags, not 3 fewer oranges.' },
+        { value: 54, msg: 'It looks like you multiplied. Each bag holds fewer than 18, so we divide.' }] }),
+    item({ id: 'p-frac1', use: 'practice', skillId: 'FRAC', difficulty: 1, answerType: 'fraction', answer: [3, 4],
+      questionText: 'What fraction of this bar is shaded?',
+      visual: { type: 'bar', parts: 4, shaded: 3, label: 'Bar with 4 equal parts, 3 shaded' },
+      hints: ['Count all the equal parts of the bar. That is the bottom number.', 'Now count only the shaded parts. That is the top number.'],
+      workedSolution: '4 equal parts, 3 shaded, so 3/4 is shaded.',
+      misconceptions: [
+        { value: 0.25, msg: 'That is the part that is not shaded. Count the shaded parts for the top number.' },
+        { value: 3, msg: 'Three parts are shaded, but out of how many? Write it as a fraction, like ?/4.' },
+        { value: 4 / 3, msg: 'The numbers are upside down. The total number of parts goes on the bottom.' }] }),
+    item({ id: 'p-frac2', use: 'practice', skillId: 'FRAC', difficulty: 1, answerType: 'fraction', answer: [1, 6],
+      questionText: 'A chocolate slab has 6 equal blocks. Sipho eats 1 block. What fraction of the slab did he eat?',
+      hints: ['How many equal blocks make the whole slab? That is the bottom number.', 'How many blocks did Sipho eat? That is the top number.'],
+      workedSolution: '6 equal blocks, 1 eaten, so 1/6.',
+      misconceptions: [
+        { value: 6, msg: 'Write it as a fraction: 1 block out of 6 blocks.' },
+        { value: 0.2, msg: 'That compares eaten blocks to blocks left. The bottom number is all 6 blocks.' }] }),
+    item({ id: 'p-foq1', use: 'practice', skillId: 'FOQ', difficulty: 1, answerType: 'number', answer: 8,
+      questionText: 'What is ½ of 16?',
+      hints: ['½ means 2 equal groups. Split 16 into 2 equal groups.', '16 ÷ 2 = ?'],
+      workedSolution: '16 ÷ 2 = 8, so ½ of 16 is 8.',
+      misconceptions: [{ value: 32, msg: 'It looks like you doubled. Half of something is smaller than the whole.' }] }),
+    item({ id: 'p-foq2', use: 'practice', skillId: 'FOQ', difficulty: 2, answerType: 'number', answer: 9,
+      questionText: 'What is ¾ of 12?',
+      hints: ['First find ¼ of 12: split 12 into 4 equal groups.', 'Each group has 3. Now take 3 groups.'],
+      workedSolution: '12 ÷ 4 = 3, so ¼ of 12 is 3. Take 3 groups: 3 × 3 = 9.',
+      misconceptions: [
+        { value: 3, msg: 'That is ¼ of 12, one group. ¾ means 3 of those groups.' },
+        { value: 36, msg: 'It looks like you multiplied 12 by 3. First split 12 into 4 equal groups.' },
+        { value: 4, msg: 'That is ⅓ of 12. ¾ means split into 4 equal groups, then take 3.' }] }),
+    item({ id: 'p-pv1', use: 'practice', skillId: 'PV', difficulty: 1, answerType: 'number', answer: 7000,
+      questionText: 'What is the value of the 7 in 7 205?',
+      hints: ['Count places from the right: units, tens, hundreds, thousands.', 'The 7 is in the thousands place.'],
+      workedSolution: 'The 7 is in the thousands place, so it is worth 7 000.',
+      misconceptions: [{ value: 7, msg: 'The digit is 7, but its value depends on its place. Which place is it in?' }] }),
+    item({ id: 'p-pv2', use: 'practice', skillId: 'PV', difficulty: 1, answerType: 'number', answer: 3052,
+      questionText: 'Write this as a number: 3 thousands, 0 hundreds, 5 tens and 2 units.',
+      hints: ['Write one digit for each place: thousands, hundreds, tens, units.', 'There are 0 hundreds, so put a 0 in the hundreds place.'],
+      workedSolution: '3 000 + 0 + 50 + 2 = 3 052.',
+      misconceptions: [{ value: 352, msg: 'Remember the 0 in the hundreds place. It keeps the 3 in the thousands.' }] }),
+    item({ id: 'p-mul1', use: 'practice', skillId: 'MUL', difficulty: 1, answerType: 'number', answer: 42,
+      questionText: '6 × 7 = ?',
+      hints: ['6 × 7 means 6 groups of 7.', '5 × 7 = 35. Add one more 7.'],
+      workedSolution: '5 × 7 = 35, plus one more 7 is 42.',
+      misconceptions: [{ value: 13, msg: 'It looks like you added 6 and 7. Multiplying means 6 groups of 7.' }] }),
+    item({ id: 'p-mul2', use: 'practice', skillId: 'MUL', difficulty: 1, answerType: 'number', answer: 45,
+      questionText: 'A bus ticket costs R9. How much do 5 tickets cost, in rand?',
+      hints: ['One ticket is R9 and you need 5 tickets.', '5 × 9 = ?'],
+      workedSolution: '5 × 9 = 45, so 5 tickets cost R45.',
+      misconceptions: [{ value: 14, msg: 'It looks like you added 9 and 5. Each of the 5 tickets costs R9.' }] }),
+    item({ id: 'p-eqv1', use: 'practice', skillId: 'EQV', difficulty: 2, answerType: 'number', answer: 6,
+      questionText: 'Fill in the missing number: 2/3 = ?/9',
+      hints: ['The bottom went from 3 to 9. What did you multiply by?', '3 × 3 = 9, so multiply the top by 3 as well.'],
+      workedSolution: '3 × 3 = 9, and 2 × 3 = 6, so 2/3 = 6/9.',
+      misconceptions: [{ value: 8, msg: 'It looks like you added 6 to the top. Multiply the top and bottom by the same number.' }] }),
+    item({ id: 'p-eqv2', use: 'practice', skillId: 'EQV', difficulty: 2, answerType: 'choice', answer: '3/4',
+      choices: ['3/4', '5/8', 'They are the same'],
+      questionText: 'Which fraction is bigger: 3/4 or 5/8?',
+      hints: ['Make the bottom numbers the same: 3/4 = ?/8', '3/4 = 6/8. Now compare 6/8 and 5/8.'],
+      workedSolution: '3/4 = 6/8, and 6/8 is bigger than 5/8.',
+      misconceptions: [{ choice: '5/8', msg: 'Bigger numbers on the bottom mean smaller pieces. Try writing 3/4 in eighths.' }] }),
+    item({ id: 'p-word1', use: 'practice', skillId: 'WORD', difficulty: 3, answerType: 'number', answer: 25,
+      questionText: 'What is ⅝ of 40?',
+      hints: ['First find ⅛ of 40: 40 ÷ 8.', '⅛ of 40 is 5. Now take 5 of those parts.'],
+      workedSolution: '40 ÷ 8 = 5, and 5 × 5 = 25.',
+      misconceptions: [{ value: 5, msg: 'That is ⅛ of 40. ⅝ means 5 of those parts.' }] }),
+    item({ id: 'p-word2', use: 'practice', skillId: 'WORD', difficulty: 3, answerType: 'number', answer: 12,
+      questionText: 'There are 32 learners in a class. ⅜ of them walk to school. How many learners walk to school?',
+      hints: ['The whole is 32 learners. Find ⅛ of 32 first.', '⅛ of 32 is 4. Now take 3 of those parts.'],
+      workedSolution: '32 ÷ 8 = 4, and 3 × 4 = 12 learners.',
+      misconceptions: [{ value: 20, msg: 'That is how many do not walk. The question asks how many do walk.' }] })
+  ];
+  var BY_ID = {};
+  ITEMS.forEach(function (i) { BY_ID[i.id] = i; });
+
+  /* Mimi's lessons: checked, scripted explanations. isiZulu is a draft only. */
+  var LESSONS = {
+    DIV: {
+      practice: ['p-div1', 'p-div2'],
+      guide: 'If R40 is shared equally by 5 children, does every child get the same amount? How could you hand it out fairly?',
+      differently: 'Division is the opposite of multiplication. Instead of asking "how much altogether?", we ask "how many in each equal group?". If 5 groups make 40, then 5 × ? = 40.',
+      example: { text: '12 sweets shared equally among 3 friends: deal them out one at a time. Each friend ends up with 4. Check: 3 × 4 = 12.', visual: { type: 'groups', total: 12, groups: 3, take: 3, label: '12 dots in 3 equal groups of 4' } },
+      zu: 'Ukwahlukanisa kusho ukwaba ngokulinganayo, ukuze wonke umuntu athole inani elifanayo. Isibonelo: amaswidi angu-12 abelwa abangane abathathu. Nikeza umngane ngamunye iswidi elilodwa ngesikhathi uze uqede. Ngamunye uthola amaswidi amane, ngoba 3 × 4 = 12.'
+    },
+    FRAC: {
+      practice: ['p-frac1', 'p-frac2'],
+      guide: 'When we cut something into equal parts, what does the bottom number of a fraction tell us?',
+      differently: 'Read a fraction like a short story. The bottom number says how many equal pieces the whole was cut into. The top number says how many of those pieces we are talking about.',
+      example: { text: 'This pizza is cut into 8 equal slices and 3 are eaten, so 3/8 of the pizza is eaten. The 8 counts all the slices. The 3 counts the slices eaten.', visual: { type: 'pie', parts: 8, shaded: 3, label: 'Pizza in 8 equal slices, 3 shaded' } },
+      zu: 'Ifrakshini ikhombisa izingxenye ezilinganayo. Inombolo engezansi itshela ukuthi into yonke ihlukaniswe yaba izingxenye ezingaki. Inombolo engenhla itshela ukuthi sikhuluma ngezingxenye ezingaki. Uma i-pizza isikwe izingcezu eziyisishiyagalombili bese kudliwa ezintathu, kudliwe u-3/8.'
+    },
+    FOQ: {
+      practice: ['p-foq1', 'p-foq2'],
+      guide: 'To find ¾ of something, what should you do first: split it into 4 equal groups, or multiply by 3?',
+      differently: 'Find one part first, then build up. ¼ of 20 is 20 ÷ 4 = 5. Then ¾ is three of those parts: 3 × 5 = 15.',
+      example: { text: '¾ of 20: share 20 into 4 equal groups of 5. Take 3 groups: 5 + 5 + 5 = 15.', visual: { type: 'groups', total: 20, groups: 4, take: 3, label: '20 dots in 4 groups of 5, 3 groups highlighted' } },
+      zu: 'Ukuthola u-¾ ka-20: okokuqala, hlukanisa u-20 ube amaqembu amane alinganayo. Iqembu ngalinye linama-5. Bese uthatha amaqembu amathathu: 5 + 5 + 5 = 15.'
+    },
+    MUL: {
+      practice: ['p-mul1', 'p-mul2'],
+      guide: 'Multiplication is a quick way to add equal groups. How many groups are there, and how many are in each group?',
+      differently: 'Break a hard fact into easier ones. 6 × 7 is 5 × 7 = 35, plus one more 7, which makes 42.',
+      example: { text: '4 trays with 3 eggs each: 3 + 3 + 3 + 3 = 12, which is the same as 4 × 3.', visual: { type: 'groups', total: 12, groups: 4, take: 4, label: '4 groups of 3 dots' } }
+    },
+    PV: {
+      practice: ['p-pv1', 'p-pv2'],
+      guide: 'In 7 205, which place is the 7 in: units, tens, hundreds or thousands?',
+      differently: 'Read the places from the right: units, tens, hundreds, thousands. A digit is worth more the further left it sits.',
+      example: { text: 'In 4 352: 4 thousands (4 000), 3 hundreds (300), 5 tens (50) and 2 units (2). 4 000 + 300 + 50 + 2 = 4 352.' }
+    },
+    EQV: {
+      practice: ['p-eqv1', 'p-eqv2'],
+      guide: 'If you cut every piece of a cake in half, do you have more cake, or just more pieces?',
+      differently: 'Multiply the top and the bottom by the same number and the fraction keeps its size. 1/2 = 2/4 = 4/8.',
+      example: { text: 'Half a bar and four eighths of a bar cover exactly the same amount.', visual: { type: 'bars', a: [2, 1], b: [8, 4], label: 'One bar halved with 1 part shaded, one bar in eighths with 4 parts shaded' } }
+    },
+    WORD: {
+      practice: ['p-word1', 'p-word2'],
+      guide: 'In a word problem, what is the whole amount, and what fraction of it do you need?',
+      differently: 'Find the whole. Divide by the bottom number to get one part. Multiply by the top number. Then check whether the question asks for the part used or the part left.',
+      example: { text: '⅔ of R60: R60 ÷ 3 = R20, so ⅓ is R20 and ⅔ is R40. If she spends R40, she has R20 left.', visual: { type: 'bar', parts: 3, shaded: 2, label: 'Bar in 3 equal parts of R20, 2 shaded' } }
+    }
+  };
+
+  var LEARNERS = [
+    { id: 'thabo', alias: 'Thabo', blurb: 'Knows his times tables, but sharing and dividing trip him up.',
+      cues: { dfoq1: '12', dfoq2: '45', ddiv1: '20', ddiv2: '27', dmul1: '56', dmul2: '60', dfrac1: '3/8', dfrac2: '2/5',
+              'p-div1': 'Tap "Give me a hint" first, then type 8', 'p-div2': '6' } },
+    { id: 'naledi', alias: 'Naledi', blurb: 'Confident with fractions and ready for harder questions.',
+      cues: { dfoq1: '15', dfoq2: '5', deqv1: '4', deqv2: '2/3', dword1: '20', dword2: '8', 'p-word1': '25', 'p-word2': '12' } },
+    { id: 'sipho', alias: 'Sipho', blurb: 'Good with basic sums, but fractions are new and confusing.',
+      cues: { dfoq1: '17', dfoq2: '12', ddiv1: '6', ddiv2: '4', dfrac1: '3/5', dfrac2: '3/5',
+              'p-frac1': 'Type 1/4 first to see the feedback, then 3/4', 'p-frac2': '1/6' } },
+    { id: 'guest', alias: 'Guest learner', blurb: 'Answer the questions yourself. No name needed.', cues: {} }
+  ];
+
+  /* ---------- Answer checking ---------- */
+  function parseAnswer(raw) {
+    var s = String(raw == null ? '' : raw).replace(/ /g, ' ').trim().toLowerCase();
+    if (!s) return { ok: false, reason: 'blank' };
+    s = s.replace(/^r\s*/, '').replace(/\s*(rand|km|kilometres|kilometers)\.?$/, '').trim();
+    var m = s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/);
+    if (m) {
+      if (+m[3] === 0) return { ok: false, reason: 'invalid' };
+      return { ok: true, value: +m[1] + (+m[2]) / (+m[3]) };
+    }
+    s = s.replace(/(\d)\s+(?=\d{3}(\D|$))/g, '$1');
+    m = s.match(/^(\d+)\s*\/\s*(\d+)$/);
+    if (m) {
+      if (+m[2] === 0) return { ok: false, reason: 'invalid' };
+      return { ok: true, value: (+m[1]) / (+m[2]) };
+    }
+    s = s.replace(',', '.');
+    if (/^\d+(\.\d+)?$/.test(s)) return { ok: true, value: parseFloat(s) };
+    return { ok: false, reason: 'invalid' };
+  }
+  function near(a, b) { return Math.abs(a - b) < 1e-9; }
+  function valueOf(item) {
+    return item.answerType === 'fraction' ? item.answer[0] / item.answer[1] : item.answer;
+  }
+  function checkAnswer(item, raw) {
+    if (item.answerType === 'choice') {
+      if (!raw) return { valid: false, message: 'Choose one answer first, or ask for a hint.' };
+      var mc = null;
+      item.misconceptions.forEach(function (m) { if (m.choice === raw) mc = m.msg; });
+      return { valid: true, correct: raw === item.answer, given: raw, misconception: mc };
+    }
+    var p = parseAnswer(raw);
+    if (!p.ok) {
+      return { valid: false, message: p.reason === 'blank'
+        ? 'Type an answer first, or ask for a hint.'
+        : 'Mimi could not read that answer. Type a number like 15, or a fraction like 3/4.' };
+    }
+    var correct = near(p.value, valueOf(item));
+    var mis = null;
+    if (!correct) item.misconceptions.forEach(function (m) { if (m.value != null && near(m.value, p.value)) mis = m.msg; });
+    return { valid: true, correct: correct, given: String(raw).trim(), value: p.value, misconception: mis };
+  }
+
+  /* ---------- Evidence and skill status ---------- */
+  function skillStatus(evidence, skillId) {
+    var ev = evidence.filter(function (e) { return e.skillId === skillId; });
+    var n = ev.length;
+    var correct = ev.filter(function (e) { return e.correct; }).length;
+    var unaided = ev.filter(function (e) { return e.correct && !e.hints; }).length;
+    var wrong = n - correct;
+    var status;
+    if (!n) status = 'not_assessed';
+    else if (unaided >= 2 && correct * 3 >= n * 2) status = 'demonstrated';
+    else if (wrong >= 2 && wrong > correct) status = 'gap';
+    else status = 'practising';
+    var confidence = n === 0 ? 'none' : n === 1 ? 'low' : n === 2 ? 'some' : 'higher';
+    return { status: status, n: n, correct: correct, unaided: unaided, wrong: wrong, confidence: confidence };
+  }
+
+  /* ---------- Adaptive diagnostic ---------- */
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function lower(id) { return SKILLS[id].name.toLowerCase(); }
+  function newDiagnostic() {
+    return { current: GOAL, stack: [], asked: [], resolved: [], phase: 'core', done: false,
+      reason: 'Mimi starts with a Grade 5 fractions question.', endReason: null };
+  }
+  function pool(skillId, asked) {
+    return ITEMS.filter(function (i) { return i.use === 'diagnostic' && i.skillId === skillId && asked.indexOf(i.id) < 0; });
+  }
+  function currentItem(d) { return d.done ? null : (pool(d.current, d.asked)[0] || null); }
+  function unresolvedPrereq(skillId, d) {
+    var p = SKILLS[skillId].prereqs;
+    for (var i = 0; i < p.length; i++) if (d.resolved.indexOf(p[i]) < 0) return p[i];
+    return null;
+  }
+  function finish(d, why) { d.done = true; d.endReason = why; d.reason = null; return d; }
+  function diagOnly(ev) { return ev.filter(function (e) { return e.source === 'diagnostic'; }); }
+
+  function advance(d0, evidence) {
+    var d = clone(d0);
+    var ev = diagOnly(evidence);
+    if (d.asked.length >= MAX_QUESTIONS) return finish(d, 'The check-in reached its 12-question limit.');
+    var st = skillStatus(ev, d.current).status;
+    var more = pool(d.current, d.asked).length > 0;
+    if (st !== 'demonstrated' && st !== 'gap' && more) {
+      d.reason = 'One answer is not enough evidence, so here is another ' + lower(d.current) + ' question.';
+      return d;
+    }
+    if (d.resolved.indexOf(d.current) < 0) d.resolved.push(d.current);
+    var from = d.current;
+    if (d.phase === 'core' && st !== 'demonstrated') {
+      var p = unresolvedPrereq(from, d);
+      if (p) {
+        d.stack.push(from);
+        d.current = p;
+        d.reason = SKILLS[from].name + ' looks tricky right now, so Mimi is checking a skill it builds on: ' + lower(p) + '.';
+        return d;
+      }
+    }
+    while (d.stack.length) {
+      var parent = d.stack[d.stack.length - 1];
+      var p2 = unresolvedPrereq(parent, d);
+      if (p2) {
+        d.current = p2;
+        d.reason = 'Next, Mimi checks another skill that ' + lower(parent) + ' builds on: ' + lower(p2) + '.';
+        return d;
+      }
+      d.stack.pop();
+    }
+    if (d.phase === 'core') {
+      if (skillStatus(ev, GOAL).status !== 'demonstrated') return finish(d, 'Mimi has enough evidence to suggest a next step.');
+      d.phase = 'stretch';
+    } else if (st !== 'demonstrated') {
+      return finish(d, 'Mimi has found a good place to keep practising.');
+    }
+    for (var i = 0; i < STRETCH.length; i++) {
+      if (d.resolved.indexOf(STRETCH[i]) < 0) {
+        d.current = STRETCH[i];
+        d.reason = 'Those answers were right, so the questions get harder: ' + lower(STRETCH[i]) + '.';
+        return d;
+      }
+    }
+    return finish(d, 'All the challenge questions are done.');
+  }
+
+  function answerDiagnostic(d, evidence, itemId, raw, hints, now) {
+    var it = BY_ID[itemId];
+    var res = checkAnswer(it, raw);
+    if (!res.valid) return { valid: false, message: res.message, diagnostic: d, evidence: evidence };
+    var entry = { itemId: itemId, skillId: it.skillId, correct: res.correct, hints: hints || 0, answer: res.given,
+      source: 'diagnostic', t: now || Date.now() };
+    var ev2 = evidence.concat([entry]);
+    var d2 = clone(d);
+    d2.asked.push(itemId);
+    d2 = advance(d2, ev2);
+    return { valid: true, result: res, entry: entry, diagnostic: d2, evidence: ev2 };
+  }
+
+  /* ---------- Recommendation ---------- */
+  function recommend(evidence) {
+    var st = {};
+    ALL.forEach(function (id) { st[id] = skillStatus(evidence, id); });
+    function line(id) { var s = st[id]; return SKILLS[id].name + ': ' + s.correct + ' of ' + s.n + ' right' + (s.correct > s.unaided ? ' (some with hints)' : ''); }
+    var byOrder = function (a, b) { return SKILLS[a].order - SKILLS[b].order; };
+    if (!evidence.length) return { kind: 'start', skillId: null, title: 'Start the check-in', reason: 'There are no answers yet, so there is nothing to recommend.', lines: [] };
+
+    var gaps = CHAIN.filter(function (id) { return st[id].status === 'gap'; });
+    var roots = gaps.filter(function (id) { return !SKILLS[id].prereqs.some(function (p) { return st[p].status === 'gap'; }); }).sort(byOrder);
+    if (roots.length) {
+      var r = roots[0];
+      var support = SKILLS[r].prereqs.filter(function (p) { return st[p].status === 'demonstrated'; });
+      return { kind: 'gap', skillId: r, title: 'Practise ' + lower(r),
+        reason: 'The answers suggest ' + lower(r) + ' may need more practice before fractions of amounts feel easy. ' +
+          'This is a possible gap based on ' + st[r].n + ' answers, not a final judgement.' +
+          (support.length ? ' ' + SKILLS[support[0]].name + ' answers were right, so that is a strong place to build from.' : ''),
+        lines: [r].concat(SKILLS[r].prereqs).concat(gaps.filter(function (g) { return g !== r; }))
+          .filter(function (id, i, a) { return st[id].n && a.indexOf(id) === i; }).map(line) };
+    }
+    var prac = ALL.filter(function (id) { return st[id].status === 'practising'; }).sort(byOrder);
+    if (prac.length) {
+      return { kind: 'practise', skillId: prac[0], title: 'Keep practising ' + lower(prac[0]),
+        reason: 'The answers for ' + lower(prac[0]) + ' are mixed, so a little more practice will show how secure it is.',
+        lines: [line(prac[0])] };
+    }
+    if (st[GOAL].status === 'demonstrated') {
+      var open = STRETCH.filter(function (id) { return st[id].status === 'not_assessed'; });
+      if (open.length) return { kind: 'stretch', skillId: open[0], title: 'Try ' + lower(open[0]),
+        reason: 'Fractions of amounts were answered correctly, so the next step is a harder kind of question.', lines: [line(GOAL)] };
+      return { kind: 'next', skillId: 'WORD', title: 'Ready for more challenge',
+        reason: 'Every question was answered correctly without hints, including the challenge questions. Mimi has two more challenge problems. ' +
+          'The next new topic would be adding fractions with the same denominator (coming later).',
+        lines: [GOAL].concat(STRETCH).map(line) };
+    }
+    return { kind: 'start', skillId: null, title: 'Finish the check-in', reason: 'There is not enough evidence yet.', lines: [] };
+  }
+
+  /* ---------- Sample classroom (fictional, seeded, never real) ---------- */
+  function sampleClass() {
+    var seed = 20261012;
+    function rnd() { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }
+    var gapRate = { PV: 0.08, MUL: 0.15, DIV: 0.35, FRAC: 0.3, FOQ: 0.45 };
+    var rows = [];
+    for (var i = 1; i <= 24; i++) {
+      var row = { id: 'S' + (i < 10 ? '0' : '') + i, cells: {} };
+      CHAIN.forEach(function (k) {
+        var x = rnd();
+        row.cells[k] = x < gapRate[k] ? 'gap' : x < gapRate[k] + 0.25 ? 'practising' : x < 0.95 ? 'demonstrated' : 'not_assessed';
+      });
+      rows.push(row);
+    }
+    return rows;
+  }
+
+  root.MM = {
+    SKILLS: SKILLS, CHAIN: CHAIN, STRETCH: STRETCH, ALL: ALL, GOAL: GOAL, MAX_QUESTIONS: MAX_QUESTIONS,
+    ITEMS: ITEMS, BY_ID: BY_ID, LESSONS: LESSONS, LEARNERS: LEARNERS,
+    parseAnswer: parseAnswer, checkAnswer: checkAnswer, skillStatus: skillStatus,
+    newDiagnostic: newDiagnostic, currentItem: currentItem, advance: advance, answerDiagnostic: answerDiagnostic,
+    recommend: recommend, sampleClass: sampleClass
+  };
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>
+/* Mzansi Minds interface. All learner data stays in this browser. */
+(function () {
+  'use strict';
+  var MM = window.MM;
+  var KEY = 'mzansi-minds-demo-v1';
+  var STATUS_LABEL = { demonstrated: 'Demonstrated', practising: 'Practising', gap: 'Possible gap', not_assessed: 'Not yet assessed' };
+  var LANGS = { zu: 'isiZulu (draft)', st: 'Sesotho (coming later)', xh: 'isiXhosa (coming later)', af: 'Afrikaans (coming later)' };
+
+  function fresh() {
+    return { v: 1, learners: {}, view: 'welcome', learnerId: null, passportFor: null, presenter: false, lang: 'zu',
+      timer: { running: false, startedAt: 0, elapsed: 0 } };
+  }
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (raw) { var s = JSON.parse(raw); if (s && s.v === 1) return Object.assign(fresh(), s); }
+    } catch (e) { /* storage unavailable: run in memory */ }
+    return fresh();
+  }
+  var S = load();
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } }
+
+  var T = { fb: null, hints: 0, hintItem: null, hintTexts: [], choice: null, msg: null, confirm: null, lastView: null, focusInput: false };
+
+  function profile(id) { return MM.LEARNERS.filter(function (l) { return l.id === id; })[0] || null; }
+  function learner(id) {
+    id = id || S.learnerId;
+    if (!id) return null;
+    if (!S.learners[id]) S.learners[id] = { evidence: [], log: [], diag: null, tutor: null };
+    return S.learners[id];
+  }
+  function hasData(id) { var L = S.learners[id]; return !!(L && (L.evidence.length || L.log.length)); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function lower(id) { return MM.SKILLS[id].name.toLowerCase(); }
+  function logEvent(L, text, kind) { L.log.push({ t: Date.now(), text: text, kind: kind || 'note' }); }
+  function pill(status) { return '<span class="pill s-' + status + '">' + STATUS_LABEL[status] + '</span>'; }
+  function clock(t) {
+    var d = new Date(t);
+    return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+  }
+  function go(view) {
+    S.view = view; T.fb = null; T.msg = null; T.confirm = null; T.choice = null;
+    save(); render();
+    try { window.scrollTo(0, 0); } catch (e) { /* ignore */ }
+  }
+
+  /* ---------- Pictures (SVG, theme-aware via CSS classes) ---------- */
+  function svgGroups(total, groups, take, label) {
+    var per = total / groups, cols = Math.ceil(Math.sqrt(per)), rows = Math.ceil(per / cols), sp = 18, pad = 10, gap = 12;
+    var bw = pad * 2 + cols * sp - 4, bh = pad * 2 + rows * sp - 4;
+    var perRow = Math.min(groups, 5), nRows = Math.ceil(groups / perRow);
+    var W = perRow * bw + (perRow - 1) * gap + 4, H = nRows * bh + (nRows - 1) * gap + 4;
+    var out = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" role="img" aria-label="' + esc(label) + '">';
+    for (var g = 0; g < groups; g++) {
+      var x = 2 + (g % perRow) * (bw + gap), y = 2 + Math.floor(g / perRow) * (bh + gap);
+      out += '<rect class="v-box' + (g < take ? ' on' : '') + '" x="' + x + '" y="' + y + '" width="' + bw + '" height="' + bh + '" rx="10"/>';
+      for (var k = 0; k < per; k++) {
+        out += '<circle class="v-dot" cx="' + (x + pad + (k % cols) * sp + 7) + '" cy="' + (y + pad + Math.floor(k / cols) * sp + 7) + '" r="6"/>';
+      }
+    }
+    return out + '</svg>';
+  }
+  function barShapes(parts, shaded, x, y, w, h) {
+    var s = '', pw = w / parts;
+    for (var i = 0; i < parts; i++) s += '<rect class="v-part' + (i < shaded ? ' on' : '') + '" x="' + (x + i * pw) + '" y="' + y + '" width="' + pw + '" height="' + h + '"/>';
+    return s;
+  }
+  function svgBar(parts, shaded, label) {
+    return '<svg viewBox="0 0 324 60" width="324" role="img" aria-label="' + esc(label) + '">' + barShapes(parts, shaded, 2, 2, 320, 56) + '</svg>';
+  }
+  function svgBars(a, b, label) {
+    return '<svg viewBox="0 0 324 132" width="324" role="img" aria-label="' + esc(label) + '">' +
+      barShapes(a[0], a[1], 2, 2, 320, 48) + '<text class="v-text" x="2" y="68">' + a[1] + '/' + a[0] + '</text>' +
+      barShapes(b[0], b[1], 2, 78, 320, 48) + '</svg>';
+  }
+  function svgPie(parts, shaded, label) {
+    var r = 70, c = 74, s = '<svg viewBox="0 0 148 148" width="148" role="img" aria-label="' + esc(label) + '">';
+    for (var i = 0; i < parts; i++) {
+      var a0 = -Math.PI / 2 + i * 2 * Math.PI / parts, a1 = a0 + 2 * Math.PI / parts;
+      var x0 = c + r * Math.cos(a0), y0 = c + r * Math.sin(a0), x1 = c + r * Math.cos(a1), y1 = c + r * Math.sin(a1);
+      s += '<path class="v-part' + (i < shaded ? ' on' : '') + '" d="M' + c + ' ' + c + ' L' + x0.toFixed(2) + ' ' + y0.toFixed(2) +
+        ' A' + r + ' ' + r + ' 0 0 1 ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + ' Z"/>';
+    }
+    return s + '</svg>';
+  }
+  function visual(v) {
+    if (!v) return '';
+    var inner = v.type === 'groups' ? svgGroups(v.total, v.groups, v.take, v.label)
+      : v.type === 'bar' ? svgBar(v.parts, v.shaded, v.label)
+      : v.type === 'pie' ? svgPie(v.parts, v.shaded, v.label)
+      : v.type === 'bars' ? svgBars(v.a, v.b, v.label) : '';
+    return '<div class="visual">' + inner + '</div>';
+  }
+
+  /* ---------- Shared pieces ---------- */
+  function answerInput(item, formId, extraButtons) {
+    var body;
+    if (item.answerType === 'choice') {
+      body = '<div class="choices" role="group" aria-label="Answer choices">' + item.choices.map(function (c) {
+        return '<button type="button" class="choice" data-act="choose" data-v="' + esc(c) + '" aria-pressed="' + (T.choice === c) + '">' + esc(c) + '</button>';
+      }).join('') + '</div><div class="row"><button class="btn btn-primary" type="submit">Check answer</button>' + (extraButtons || '') + '</div>';
+    } else {
+      body = '<div class="answer-row"><label class="sr" for="ans">Your answer</label>' +
+        '<input id="ans" name="ans" autocomplete="off" inputmode="' + (item.answerType === 'fraction' ? 'text' : 'decimal') + '" placeholder="' +
+        (item.answerType === 'fraction' ? 'e.g. 1/2' : 'Your answer') + '">' +
+        '<button class="btn btn-primary" type="submit">Check answer</button>' + (extraButtons || '') + '</div>' +
+        (item.answerType === 'fraction' ? '<p class="small muted">Type a fraction with a slash, like 2/3.</p>' : '');
+    }
+    var msg = T.msg ? '<div class="feedback info" role="status">' + esc(T.msg) + '</div>' : '';
+    return '<form id="' + formId + '" class="stack" novalidate>' + body + msg + '</form>';
+  }
+  function cue(itemId) {
+    if (!S.presenter) return '';
+    var p = profile(S.learnerId);
+    var c = p && p.cues[itemId];
+    if (!c) return '';
+    return '<div class="cue"><span class="eyebrow">Presenter cue (only you see this when cues are on)</span><br>Suggested answer for ' +
+      esc(p.alias) + ': <b>' + esc(c) + '</b></div>';
+  }
+  function needLearner() {
+    return '<section class="stack"><h1 tabindex="-1">Choose a learner first</h1><p class="lead">Pick one of the fictional learners, or answer as a guest.</p>' +
+      '<div class="row"><button class="btn btn-primary" data-act="go" data-v="learners">Choose a learner</button></div></section>';
+  }
+
+  /* ---------- Views ---------- */
+  function vWelcome() {
+    return '<section class="hero">' +
+      '<div class="stack"><span class="eyebrow">Grade 5 maths · working demo</span>' +
+      '<h1 tabindex="-1">Welcome to Mzansi Minds.<span>Your learning journey starts here.</span></h1>' +
+      '<p class="promise">Every child deserves a chance to understand.</p>' +
+      '<p>Mzansi Minds finds out which maths skill a learner may need to practise first, then Mimi, the learning companion, explains it step by step.</p>' +
+      '<div class="row"><button class="btn btn-primary" data-act="go" data-v="learners">I\'m a Learner</button>' +
+      '<button class="btn btn-dark" data-act="go" data-v="teacher">I\'m a Teacher</button>' +
+      '<button class="btn btn-ghost" data-act="go" data-v="present">Explore Demo</button></div></div>' +
+      '<figure class="hero-fig" style="margin:0"><span class="eyebrow">How Mimi explains ¾ of 20</span>' +
+      svgGroups(20, 4, 3, '20 dots shared into 4 equal groups of 5, with 3 groups highlighted') +
+      '<div class="sum">¾ of 20 = 5 + 5 + 5 = 15</div>' +
+      '<figcaption>Share 20 into 4 equal groups. Each group has 5. Take 3 of the groups.</figcaption></figure></section>' +
+
+      '<section class="stack"><div class="section-head"><span class="eyebrow">How it works</span><h2>Three steps, driven by real answers</h2></div>' +
+      '<div class="steps3">' +
+      '<div><span class="stepnum">1</span><h3>A short check-in</h3><p class="muted">Up to 12 questions. A missed fractions question leads to a question on the skill underneath it. Right answers lead to harder ones.</p></div>' +
+      '<div><span class="stepnum">2</span><h3>Practise with Mimi</h3><p class="muted">Hints, a different explanation, a worked example or a draft isiZulu version, one step at a time.</p></div>' +
+      '<div><span class="stepnum">3</span><h3>Learning Passport</h3><p class="muted">Every answer and hint is recorded, so learners and teachers can see progress for each skill.</p></div>' +
+      '</div></section>' +
+
+      '<section class="panel"><h2>What is real in this demo</h2><ul class="real-list">' +
+      '<li>Answers are marked by fixed maths rules, never by guesswork.</li>' +
+      '<li>Mimi uses written explanations that were checked. Live AI is coming later.</li>' +
+      '<li>Thabo, Naledi and Sipho are fictional learners.</li>' +
+      '<li>The teacher\'s class is clearly marked sample data.</li>' +
+      '<li>No names, logins or personal details are collected.</li>' +
+      '<li>Everything stays in this browser and can be reset.</li></ul></section>';
+  }
+
+  function vLearners() {
+    return '<section class="stack"><div class="section-head"><span class="eyebrow">Learners</span><h1 tabindex="-1">Who is learning today?</h1>' +
+      '<p class="lead">These are fictional Grade 5 learners for the demo. No registration needed.</p></div>' +
+      '<div class="learners">' + MM.LEARNERS.map(function (p) {
+        var L = S.learners[p.id], n = L ? L.evidence.length : 0, done = L && L.diag && L.diag.done;
+        return '<article class="lcard"><div class="name"><span class="avatar" aria-hidden="true">' + esc(p.alias[0]) + '</span>' +
+          '<div><h2 style="font-size:1.2rem">' + esc(p.alias) + '</h2><span class="tag">' + (p.id === 'guest' ? 'Your answers' : 'Fictional · Grade 5') + '</span></div></div>' +
+          '<p class="muted">' + esc(p.blurb) + '</p>' +
+          '<p class="small">' + (n ? n + ' answer' + (n === 1 ? '' : 's') + ' saved' + (done ? ' · check-in finished' : '') : 'No answers yet') + '</p>' +
+          '<div class="row"><button class="btn btn-primary btn-s" data-act="pick" data-v="' + p.id + '">' + (n ? 'Continue' : 'Start as ' + esc(p.alias)) + '</button></div></article>';
+      }).join('') + '</div></section>';
+  }
+
+  function vHome() {
+    var p = profile(S.learnerId); if (!p) return needLearner();
+    var L = learner(), d = L.diag, rec = MM.recommend(L.evidence);
+    var checkState = !d ? 'Not started' : d.done ? 'Finished · ' + d.asked.length + ' questions' : 'In progress · ' + d.asked.length + ' answered';
+    var tutorReady = d && d.done;
+    var confirm = T.confirm === 'learner'
+      ? '<div class="confirm" role="alert"><p>Clear all of ' + esc(p.alias) + '\'s answers and start again? This cannot be undone.</p><div class="row">' +
+        '<button class="btn btn-danger btn-s" data-act="clearLearner">Yes, start again</button><button class="btn btn-ghost btn-s" data-act="cancel">Keep answers</button></div></div>'
+      : '';
+    return '<section class="stack"><div class="section-head"><span class="eyebrow">' + (p.id === 'guest' ? 'Guest learner' : 'Fictional learner · Grade 5') + '</span>' +
+      '<h1 tabindex="-1">Hi ' + esc(p.alias) + '. What shall we do?</h1></div>' +
+      '<div class="learners">' +
+      '<article class="lcard"><span class="eyebrow">Step 1</span><h2 style="font-size:1.2rem">Maths check-in</h2><p class="muted">' + checkState + '</p>' +
+      '<div class="row"><button class="btn btn-primary btn-s" data-act="go" data-v="' + (d && d.done ? 'results' : 'check') + '">' + (!d ? 'Start check-in' : d.done ? 'See results' : 'Continue') + '</button></div></article>' +
+      '<article class="lcard"><span class="eyebrow">Step 2</span><h2 style="font-size:1.2rem">Practise with Mimi</h2><p class="muted">' +
+      (tutorReady ? esc(rec.title) : 'Opens after the check-in, so Mimi knows where to start.') + '</p>' +
+      '<div class="row"><button class="btn btn-primary btn-s" data-act="go" data-v="mimi"' + (tutorReady ? '' : ' disabled') + '>Practise</button></div></article>' +
+      '<article class="lcard"><span class="eyebrow">Step 3</span><h2 style="font-size:1.2rem">Learning Passport</h2><p class="muted">' + L.evidence.length + ' answers recorded</p>' +
+      '<div class="row"><button class="btn btn-ghost btn-s" data-act="passport" data-v="' + p.id + '">Open Passport</button></div></article>' +
+      '<article class="lcard"><span class="eyebrow">Options</span><div class="row"><button class="btn btn-ghost btn-s" data-act="go" data-v="learners">Switch learner</button>' +
+      '<button class="btn btn-ghost btn-s" data-act="askClearLearner">Start again</button></div>' + confirm + '</article>' +
+      '</div></section>';
+  }
+
+  function vCheck() {
+    var p = profile(S.learnerId); if (!p) return needLearner();
+    var L = learner();
+    if (!L.diag) { L.diag = MM.newDiagnostic(); logEvent(L, 'Started the maths check-in', 'start'); save(); }
+    if (T.fb) return vCheckFeedback(p, L);
+    if (L.diag.done) return vResults();
+    var it = MM.currentItem(L.diag);
+    if (T.hintItem !== it.id) { T.hintItem = it.id; T.hints = 0; T.hintTexts = []; T.choice = null; T.msg = null; }
+    var n = L.diag.asked.length + 1;
+    var hints = T.hintTexts.map(function (h) { return '<div class="hintbox" role="status"><b>Hint:</b> ' + esc(h) + '</div>'; }).join('');
+    return '<section class="stack"><div class="section-head"><span class="eyebrow">' + esc(p.alias) + ' · Maths check-in</span>' +
+      '<h1 tabindex="-1" class="sr">Check-in question ' + n + '</h1></div>' +
+      '<div class="qcard"><div class="qmeta"><span class="progress">Question ' + n + ' · at most ' + MM.MAX_QUESTIONS + '</span>' +
+      '<span class="tag">Checking: ' + esc(MM.SKILLS[it.skillId].name) + '</span></div>' +
+      (L.diag.reason ? '<p class="why"><b>Why this question?</b> ' + esc(L.diag.reason) + '</p>' : '') +
+      '<p class="qtext">' + esc(it.questionText) + '</p>' + visual(it.visual) + hints +
+      answerInput(it, 'checkForm', T.hintTexts.length < it.hints.length ? '<button type="button" class="btn btn-ghost" data-act="checkHint">I need a hint</button>' : '') +
+      cue(it.id) + '</div>' +
+      '<p class="small muted">A hint is fine. Mimi notes it, and a right answer with a hint counts as "practising" rather than "demonstrated".</p></section>';
+  }
+
+  function vCheckFeedback(p, L) {
+    var fb = T.fb, it = MM.BY_ID[fb.itemId];
+    var head = fb.correct
+      ? (fb.hints ? 'Correct, with a hint. Mimi counts this as practising for now.' : 'Correct. Well done.')
+      : 'Not quite, and that is useful to know. Mimi will help with this kind of question after the check-in.';
+    return '<section class="stack"><div class="section-head"><span class="eyebrow">' + esc(p.alias) + ' · Maths check-in</span>' +
+      '<h1 tabindex="-1" class="sr">Answer feedback</h1></div><div class="qcard">' +
+      '<p class="qtext">' + esc(it.questionText) + '</p>' +
+      '<div class="feedback ' + (fb.correct ? 'good' : 'notyet') + '" role="status"><p><b>You answered ' + esc(fb.given) + '.</b> ' + esc(head) + '</p>' +
+      '<details' + (fb.correct ? '' : ' open') + '><summary>See the steps</summary><p>' + esc(it.workedSolution) + '</p></details></div>' +
+      '<div class="row"><button class="btn btn-primary" data-act="checkNext" id="nextBtn">' + (L.diag.done ? 'See my results' : 'Next question') + '</button></div></div></section>';
+  }
+
+  function ladder(ev, focusId) {
+    return '<div class="ladder">' + MM.ALL.slice().reverse().map(function (id) {
+      var s = MM.skillStatus(ev, id), sk = MM.SKILLS[id];
+      var builds = sk.prereqs.length ? 'Builds on ' + sk.prereqs.map(function (p) { return MM.SKILLS[p].name.toLowerCase(); }).join(' and ') : 'Foundation skill';
+      return '<div class="rung' + (id === focusId ? ' focus' : '') + '"><span class="nm">' + esc(sk.name) + (sk.stretch ? ' <span class="tag">Challenge</span>' : '') +
+        '<small>' + esc(builds) + '</small></span>' + pill(s.status) +
+        '<span class="meta">' + (s.n ? s.n + ' answer' + (s.n === 1 ? '' : 's') + ' · ' + s.correct + ' right' + (s.correct > s.unaided ? ' (' + (s.correct - s.unaided) + ' with hints)' : '') +
+          ' · evidence: ' + s.confidence : 'No questions on this yet') + '</span></div>';
+    }).join('') + '</div>';
+  }
+
+  function vResults() {
+    var p = profile(S.learnerId); if (!p) return needLearner();
+    var L = learner();
+    if (!L.diag || !L.diag.done) return '<section class="stack"><h1 tabindex="-1">The check-in is not finished yet</h1><div class="row"><button class="btn btn-primary" data-act="go" data-v="check">Continue the check-in</button></div></section>';
+    var rec = MM.recommend(L.evidence);
+    return '<section class="stack"><div class="section-head"><span class="eyebrow">' + esc(p.alias) + ' · Check-in results</span>' +
+      '<h1 tabindex="-1">Here is what the answers show</h1><p class="lead">' + L.diag.asked.length + ' questions answered. ' + esc(L.diag.endReason || '') + '</p></div>' +
+      '<div class="two"><div class="rec"><span class="eyebrow">Suggested next step</span><h2>' + esc(rec.title) + '</h2><p>' + esc(rec.reason) + '</p>' +
+      (rec.lines.length ? '<ul>' + rec.lines.map(function (l) { return '<li>' + esc(l) + '</li>'; }).join('') + '</ul>' : '') +
+      '<div class="row"><button class="btn btn-primary" data-act="go" data-v="mimi">Practise with Mimi</button>' +
+      '<button class="btn btn-ghost" style="color:inherit;border-color:currentColor" data-act="passport" data-v="' + p.id + '">Learning Passport</button></div></div>' +
+      '<div class="stack-s"><h2 style="font-size:1.15rem">Skills, from the goal down to the basics</h2>' + ladder(L.evidence, rec.skillId) +
+      '<p class="small muted">"Possible gap" needs at least two missed answers. One mistake is never enough to decide anything.</p></div></div></section>';
+  }
+
+  /* ---------- Mimi ---------- */
+  function startTutor(L, p) {
+    var rec = MM.recommend(L.evidence);
+    var skill = rec.skillId || MM.GOAL;
+    L.tutor = { skillId: skill, idx: 0, hints: 0, attempts: 0, recorded: false, itemDone: false, shown: false, msgs: [] };
+    var intro = 'Hi ' + p.alias + '. Let\'s practise ' + lower(skill) + ' together.';
+    if (rec.kind === 'gap') intro += ' Your check-in answers suggest this is a good place to start, before more fractions.';
+    if (rec.kind === 'next') intro += ' You answered everything correctly, so here are two challenge problems.';
+    say(L, 'mimi', intro);
+    say(L, 'mimi', MM.LESSONS[skill].guide, { kind: 'guide' });
+    logEvent(L, 'Started practice with Mimi: ' + MM.SKILLS[skill].name, 'start');
+  }
+  function say(L, who, text, extra) {
+    var m = Object.assign({ who: who, text: text }, extra || {});
+    L.tutor.msgs.push(m);
+    if (L.tutor.msgs.length > 60) L.tutor.msgs.shift();
+  }
+  function tutorItem(L) { return MM.BY_ID[MM.LESSONS[L.tutor.skillId].practice[L.tutor.idx]]; }
+
+  function vMimi() {
+    var p = profile(S.learnerId); if (!p) return needLearner();
+    var L = learner();
+    if (!L.diag || !L.diag.done) {
+      return '<section class="stack"><span class="eyebrow">Mimi</span><h1 tabindex="-1">Mimi needs the check-in first</h1>' +
+        '<p class="lead">Mimi chooses what to practise from ' + esc(p.alias) + '\'s check-in answers, so the check-in comes first.</p>' +
+        '<div class="row"><button class="btn btn-primary" data-act="go" data-v="check">Go to the check-in</button></div></section>';
+    }
+    if (!L.tutor) { startTutor(L, p); save(); }
+    var t = L.tutor, lesson = MM.LESSONS[t.skillId], it = tutorItem(L);
+    var last = t.idx >= lesson.practice.length - 1;
+    var panel;
+    if (t.itemDone) {
+      panel = '<div class="qcard"><span class="eyebrow">Practice ' + (t.idx + 1) + ' of ' + lesson.practice.length + '</span><p class="qtext">' + esc(it.questionText) + '</p>' +
+        '<div class="row">' + (last
+          ? '<button class="btn btn-primary" data-act="passport" data-v="' + p.id + '" id="nextBtn">Open Learning Passport</button><button class="btn btn-ghost" data-act="tutorRestart">New practice set</button>'
+          : '<button class="btn btn-primary" data-act="tutorNext" id="nextBtn">Next question</button>') + '</div></div>';
+    } else {
+      panel = '<div class="qcard"><div class="qmeta"><span class="eyebrow">Practice ' + (t.idx + 1) + ' of ' + lesson.practice.length + '</span>' +
+        '<span class="tag">' + esc(MM.SKILLS[t.skillId].name) + '</span></div>' +
+        '<p class="qtext">' + esc(it.questionText) + '</p>' + visual(it.visual) + answerInput(it, 'tutorForm', '') + cue(it.id) +
+        (t.attempts >= 2 ? '<div class="row"><button class="btn btn-ghost btn-s" data-act="tutorSteps">Show me the steps</button></div>' : '') + '</div>';
+    }
+    var tools = '<div class="stack-s"><span class="eyebrow">Ask Mimi</span><div class="tools">' +
+      '<button class="btn btn-dark btn-s" data-act="tHint">Give me a hint</button>' +
+      '<button class="btn btn-ghost btn-s" data-act="tDiff">Explain differently</button>' +
+      '<button class="btn btn-ghost btn-s" data-act="tExample">Show an example</button>' +
+      '<button class="btn btn-ghost btn-s" data-act="tLang">Explain in my language</button>' +
+      '<button class="btn btn-ghost btn-s" data-act="tRetry">Let me try again</button></div>' +
+      '<p class="small muted">Mimi only talks about this maths topic and never asks for personal details. Explanations are written and checked in advance; live AI is coming later.</p></div>';
+    var chat = '<div class="chat" id="chat" aria-live="polite" aria-label="Conversation with Mimi">' + t.msgs.map(function (m) {
+      if (m.who === 'me') return '<div class="msg me"><div class="bubble"><span class="label">' + esc(p.alias) + '</span><p>' + esc(m.text) + '</p></div></div>';
+      return '<div class="msg"><span class="mark" aria-hidden="true">M</span><div class="bubble"><span class="label">Mimi' + (m.kind === 'guide' ? ' · think about this' : '') + '</span>' +
+        (m.draft ? '<span class="draft">Draft isiZulu translation. Needs checking by an isiZulu-speaking teacher.</span>' : '') +
+        '<p' + (m.draft ? ' lang="zu"' : '') + '>' + esc(m.text) + '</p>' + visual(m.visual) + '</div></div>';
+    }).join('') + '</div>';
+    return '<section class="stack"><div class="section-head"><span class="eyebrow">' + esc(p.alias) + ' · Practise with Mimi</span>' +
+      '<h1 tabindex="-1">' + esc(MM.SKILLS[t.skillId].name) + '</h1></div>' +
+      '<div class="mimi"><div class="stack">' + panel + tools + '</div>' + chat + '</div></section>';
+  }
+
+  function tutorAction(act) {
+    var p = profile(S.learnerId), L = learner(), t = L.tutor; if (!t) return;
+    var lesson = MM.LESSONS[t.skillId], it = tutorItem(L);
+    if (act === 'tHint') {
+      say(L, 'me', 'Give me a hint.');
+      if (t.itemDone) { say(L, 'mimi', 'You have finished this question. Tap "Next question" when you are ready.'); }
+      else {
+        t.hints++;
+        var h = it.hints[t.hints - 1];
+        say(L, 'mimi', h || 'That was my last hint for this one. Try "Show an example", then have another go.');
+        logEvent(L, 'Asked Mimi for hint ' + Math.min(t.hints, it.hints.length) + ' on: ' + it.questionText, 'hint');
+      }
+    } else if (act === 'tDiff') {
+      say(L, 'me', 'Can you explain it differently?');
+      say(L, 'mimi', lesson.differently);
+      logEvent(L, 'Asked for a different explanation (' + MM.SKILLS[t.skillId].name + ')', 'hint');
+    } else if (act === 'tExample') {
+      say(L, 'me', 'Show me an example.');
+      say(L, 'mimi', lesson.example.text, { visual: lesson.example.visual });
+      logEvent(L, 'Looked at a worked example (' + MM.SKILLS[t.skillId].name + ')', 'hint');
+    } else if (act === 'tLang') {
+      say(L, 'me', 'Explain in my language.');
+      if (S.lang === 'zu' && lesson.zu) {
+        say(L, 'mimi', lesson.zu, { draft: true });
+        logEvent(L, 'Read the draft isiZulu explanation (' + MM.SKILLS[t.skillId].name + ')', 'hint');
+      } else {
+        var why = S.lang === 'zu' ? 'The isiZulu explanation for ' + lower(t.skillId) + ' is not ready yet.' : LANGS[S.lang].replace(' (coming later)', '') + ' explanations are coming later.';
+        say(L, 'mimi', why + ' Here it is in English: ' + lesson.differently);
+        logEvent(L, 'Asked for another language; English shown because no translation is ready', 'hint');
+      }
+    } else if (act === 'tRetry') {
+      say(L, 'me', 'Let me try again.');
+      say(L, 'mimi', t.itemDone ? 'Good idea. Tap "Next question" for a new one.' : 'Take your time. Read the question again, then type your answer.');
+      T.focusInput = true; T.msg = null; T.choice = null;
+    } else if (act === 'tutorSteps') {
+      say(L, 'mimi', 'Here are the steps: ' + it.workedSolution + ' Next time, try starting with the first step on your own.');
+      if (!t.recorded) { recordPractice(L, t, it, false, '(steps shown)'); }
+      logEvent(L, 'Mimi showed the steps for: ' + it.questionText, 'hint');
+      t.itemDone = true;
+    } else if (act === 'tutorNext') {
+      t.idx++; t.hints = 0; t.attempts = 0; t.recorded = false; t.itemDone = false;
+      say(L, 'mimi', 'Here is another one. You can ask for a hint any time.');
+    } else if (act === 'tutorRestart') {
+      startTutor(L, p);
+    }
+    save(); render();
+    var c = document.getElementById('chat'); if (c) c.scrollTop = c.scrollHeight;
+  }
+  function recordPractice(L, t, it, correct, answer) {
+    L.evidence.push({ itemId: it.id, skillId: it.skillId, correct: correct, hints: t.hints, answer: answer, source: 'practice', t: Date.now() });
+    t.recorded = true;
+  }
+  function submitTutor(raw) {
+    var p = profile(S.learnerId), L = learner(), t = L.tutor, it = tutorItem(L);
+    var res = MM.checkAnswer(it, raw);
+    if (!res.valid) { T.msg = res.message; render(); focusAnswer(); return; }
+    T.msg = null; T.choice = null;
+    say(L, 'me', res.given);
+    var first = !t.recorded;
+    if (first) recordPractice(L, t, it, res.correct, res.given);
+    logEvent(L, 'Practice · ' + it.questionText + ' → "' + res.given + '" (' + (res.correct ? 'correct' : 'not yet') +
+      (t.hints ? ', after ' + t.hints + ' hint' + (t.hints > 1 ? 's' : '') : '') + (first ? '' : ', retry') + ')', res.correct ? 'right' : 'wrong');
+    if (res.correct) {
+      say(L, 'mimi', (t.attempts ? 'Yes! You got there. ' : 'Yes, that\'s right. ') + 'Here is why: ' + it.workedSolution +
+        (t.hints && first ? ' You used a hint, so this counts as practising. Next time, try it without one.' : ''));
+      t.itemDone = true;
+    } else {
+      t.attempts++;
+      say(L, 'mimi', (res.misconception || 'Not yet. Read the question again, or ask for a hint.') +
+        (t.attempts >= 2 ? ' If you are stuck, tap "Show me the steps".' : ''));
+    }
+    save(); render();
+    var c = document.getElementById('chat'); if (c) c.scrollTop = c.scrollHeight;
+    if (!t.itemDone) focusAnswer();
+  }
+
+  /* ---------- Passport ---------- */
+  function vPassport() {
+    var withData = MM.LEARNERS.filter(function (l) { return hasData(l.id); });
+    var id = S.passportFor && hasData(S.passportFor) ? S.passportFor : (S.learnerId && hasData(S.learnerId) ? S.learnerId : (withData[0] && withData[0].id));
+    var head = '<div class="section-head"><span class="eyebrow">Learning Passport</span><h1 tabindex="-1">Learning Passport</h1></div>';
+    if (!id) {
+      return '<section class="stack">' + head + '<div class="panel"><h2>No learning recorded yet</h2>' +
+        '<p>The Passport only shows answers that were actually given on this device. Choose a learner and start the check-in, and every answer will appear here.</p>' +
+        '<div class="row"><button class="btn btn-primary" data-act="go" data-v="learners">Choose a learner</button></div></div></section>';
+    }
+    var p = profile(id), L = S.learners[id], rec = MM.recommend(L.evidence);
+    var diagN = L.evidence.filter(function (e) { return e.source === 'diagnostic'; }).length;
+    var pracN = L.evidence.length - diagN;
+    var pracRight = L.evidence.filter(function (e) { return e.source === 'practice' && e.correct; }).length;
+    var tabs = '<div class="tabs" role="group" aria-label="Choose a learner">' + MM.LEARNERS.map(function (l) {
+      return '<button data-act="passport" data-v="' + l.id + '" aria-pressed="' + (l.id === id) + '"' + (hasData(l.id) ? '' : ' disabled') + '>' + esc(l.alias) + '</button>';
+    }).join('') + '</div>';
+    var rows = MM.ALL.map(function (k) {
+      var s = MM.skillStatus(L.evidence, k);
+      return '<tr><td>' + esc(MM.SKILLS[k].name) + '</td><td>' + pill(s.status) + '</td><td>' + s.n + '</td><td>' + s.correct + '</td><td>' + (s.correct - s.unaided) + '</td></tr>';
+    }).join('');
+    var tl = L.log.map(function (e) { return '<li><time>' + clock(e.t) + '</time><span>' + esc(e.text) + '</span></li>'; }).join('');
+    return '<section class="stack">' + tabs +
+      '<div class="passport-head"><div class="stack-s"><span class="eyebrow">Learning Passport · ' + (id === 'guest' ? 'Guest learner' : 'Fictional learner · Grade 5') + '</span>' +
+      '<h1 tabindex="-1">' + esc(p.alias) + '</h1></div><span class="stamp">Real answers from this device</span></div>' +
+      '<div class="two"><div class="stack"><div class="rec"><span class="eyebrow">Next step</span><h2>' + esc(rec.title) + '</h2><p>' + esc(rec.reason) + '</p></div>' +
+      '<div class="panel"><h2 style="font-size:1.1rem">So far</h2><p>' + diagN + ' check-in answer' + (diagN === 1 ? '' : 's') + ' · ' + pracN + ' practice answer' + (pracN === 1 ? '' : 's') +
+      ' (' + pracRight + ' right first time)</p><p class="small muted">Print and download: coming later.</p></div></div>' +
+      '<div class="stack-s"><h2 style="font-size:1.15rem">Skills</h2><div class="tablewrap"><table><thead><tr><th>Skill</th><th>Status</th><th>Answers</th><th>Right</th><th>With hints</th></tr></thead><tbody>' +
+      rows + '</tbody></table></div></div></div>' +
+      '<div class="stack-s"><h2 style="font-size:1.15rem">Activity, in order</h2><ul class="timeline">' + tl + '</ul></div></section>';
+  }
+
+  /* ---------- Teacher ---------- */
+  var ACTIVITIES = {
+    PV: 'Build numbers with place-value cards, then read them aloud in thousands, hundreds, tens and units.',
+    MUL: 'Times-table games with counters arranged in equal groups.',
+    DIV: 'Share counters or play money equally among groups, then write the matching division sentence.',
+    FRAC: 'Fold paper strips into equal parts and name each part as a fraction.',
+    FOQ: 'Use counters to find ¼, ½ and ¾ of 12 and 20 before moving to written fractions.'
+  };
+  function vTeacher() {
+    var rows = MM.sampleClass();
+    var counts = {};
+    MM.CHAIN.forEach(function (k) { counts[k] = { demonstrated: 0, practising: 0, gap: 0, not_assessed: 0 }; rows.forEach(function (r) { counts[k][r.cells[k]]++; }); });
+    var sym = { demonstrated: '●', practising: '◐', gap: '▲', not_assessed: '○' };
+    var heat = '<div class="tablewrap"><table class="heat"><caption class="sr">Sample class skill grid, fictional data</caption><thead><tr><th>Sample learner</th>' +
+      MM.CHAIN.map(function (k) { return '<th class="c" title="' + esc(MM.SKILLS[k].name) + '">' + k + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      rows.map(function (r) {
+        return '<tr><td>' + r.id + '</td>' + MM.CHAIN.map(function (k) {
+          var st = r.cells[k];
+          return '<td class="c"><span class="cell s-' + st + '" style="padding:0" title="' + STATUS_LABEL[st] + '"><span class="sr">' + STATUS_LABEL[st] + '</span></span></td>';
+        }).join('') + '</tr>';
+      }).join('') + '</tbody></table></div>';
+    var bars = MM.CHAIN.map(function (k) {
+      var c = counts[k], tot = rows.length;
+      return '<div class="barrow"><span>' + esc(MM.SKILLS[k].name) + '</span><div class="track" aria-hidden="true">' +
+        ['demonstrated', 'practising', 'gap', 'not_assessed'].map(function (s) {
+          return '<i class="s-' + s + '" style="width:' + (100 * c[s] / tot) + '%;background:currentColor"></i>';
+        }).join('') + '</div><span class="small"><b>' + c.gap + '</b> gap</span></div>';
+    }).join('');
+    var ranked = MM.CHAIN.slice().sort(function (a, b) { return counts[b].gap - counts[a].gap; }).slice(0, 3);
+    var sugg = ranked.map(function (k) {
+      return '<li><b>' + esc(MM.SKILLS[k].name) + '</b>: ' + counts[k].gap + ' sample learners show a possible gap. Suggested small-group activity: ' + esc(ACTIVITIES[k]) + '</li>';
+    }).join('');
+    var real = MM.LEARNERS.filter(function (l) { return hasData(l.id); });
+    var realTable = real.length
+      ? '<div class="tablewrap"><table><thead><tr><th>Learner (fictional profile)</th><th>Check-in answers</th><th>Practice answers</th><th>Suggested next step</th></tr></thead><tbody>' +
+        real.map(function (l) {
+          var L = S.learners[l.id], d = L.evidence.filter(function (e) { return e.source === 'diagnostic'; }).length;
+          return '<tr><td>' + esc(l.alias) + '</td><td>' + d + '</td><td>' + (L.evidence.length - d) + '</td><td>' + esc(MM.recommend(L.evidence).title) + '</td></tr>';
+        }).join('') + '</tbody></table></div>'
+      : '<p class="muted">No answers on this device yet. When a learner does the check-in, their real results appear here.</p>';
+    return '<section class="stack"><div class="section-head"><span class="eyebrow">Teacher view</span><h1 tabindex="-1">Where does the class need support?</h1>' +
+      '<p class="lead">Mzansi Minds points to where to look. The teacher decides what happens next.</p></div>' +
+      '<div class="stack-s"><h2>Answers from this device</h2><p class="small muted">Real answers, entered during this demo, by fictional learner profiles.</p>' + realTable + '</div>' +
+      '<div class="sample-banner" role="note"><strong>SAMPLE DATA: a made-up class of 24</strong><span>These are not real learners or real school results. They show what a teacher would see once a class has used Mzansi Minds.</span></div>' +
+      '<div class="two"><div class="stack-s"><h2 style="font-size:1.15rem">Sample class by skill</h2><div class="legend">' +
+      ['demonstrated', 'practising', 'gap', 'not_assessed'].map(pill).join('') + '</div><div class="bars">' + bars + '</div>' +
+      '<h2 style="font-size:1.15rem;margin-top:1rem">Suggested group work (sample)</h2><ul class="stack-s" style="padding-left:1.1rem;margin:0">' + sugg + '</ul></div>' +
+      '<div class="stack-s"><h2 style="font-size:1.15rem">Sample class grid</h2>' + heat + '</div></div>' +
+      '<p class="small muted">This is not an official assessment or diagnosis. Results are indicators to discuss, not labels.</p></section>';
+  }
+
+  /* ---------- Presenter ---------- */
+  var RUN = [
+    { at: '0:00', title: 'Open with the promise', say: 'Most campaigns tell you what they will do. I wanted to show you.', act: 'go', v: 'welcome', btn: 'Welcome page' },
+    { at: '0:30', title: 'Choose Thabo', say: 'Thabo is a fictional Grade 5 learner. He knows his times tables, but fractions are hard for him.', act: 'pick', v: 'thabo', btn: 'Pick Thabo' },
+    { at: '0:50', title: 'Do the check-in', say: 'Watch: when Thabo misses a fractions question, Mimi steps back to check division.', act: 'startCheck', v: 'thabo', btn: 'Start check-in' },
+    { at: '2:30', title: 'Show the results', say: 'Multiplication is fine. Division shows a possible gap, based on two answers, not one.', act: 'go', v: 'results', btn: 'Results' },
+    { at: '3:10', title: 'Practise with Mimi', say: 'Ask for a hint, try "Explain in my language", then answer the follow-up.', act: 'go', v: 'mimi', btn: 'Mimi' },
+    { at: '4:00', title: 'Learning Passport', say: 'Every answer and hint is here. Nothing was made up.', act: 'passport', v: 'thabo', btn: 'Passport' },
+    { at: '4:30', title: 'Teacher view', say: 'The teacher still decides. This shows where to look. The class here is sample data.', act: 'go', v: 'teacher', btn: 'Teacher view' },
+    { at: '5:00', title: 'Close', say: 'Don\'t Promise Tomorrow. Build It Today.', act: null }
+  ];
+  function elapsed() { var t = S.timer; return t.elapsed + (t.running ? Date.now() - t.startedAt : 0); }
+  function fmt(ms) { var s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+  function vPresent() {
+    var confirm = T.confirm === 'presentation'
+      ? '<div class="confirm" role="alert"><p>Clear every learner\'s answers and reset the timer? Use this before you present again.</p><div class="row">' +
+        '<button class="btn btn-danger btn-s" data-act="resetPresentation">Yes, reset</button><button class="btn btn-ghost btn-s" data-act="cancel">Cancel</button></div></div>'
+      : '';
+    return '<section class="stack"><div class="section-head"><span class="eyebrow">Presenter mode</span><h1 tabindex="-1">Five-minute demo run sheet</h1>' +
+      '<p class="lead">For the SDG 4 campaign showcase. Everything below runs on real answers typed during the demo.</p></div>' +
+      '<div class="two"><div class="panel"><span class="eyebrow">Timer</span><div class="timer" id="timer">' + fmt(elapsed()) + '</div>' +
+      '<div class="row"><button class="btn btn-primary btn-s" data-act="timer">' + (S.timer.running ? 'Pause' : 'Start') + '</button>' +
+      '<button class="btn btn-ghost btn-s" data-act="timerReset">Reset timer</button></div></div>' +
+      '<div class="panel"><label class="switch"><input type="checkbox" id="cueToggle" data-act="cues"' + (S.presenter ? ' checked' : '') + '> Show presenter cues (suggested answers)</label>' +
+      '<p class="small muted">Cues appear in a dashed box under each question. The engine still marks whatever is typed.</p>' +
+      '<div class="row"><button class="btn btn-ghost btn-s" data-act="askReset" data-v="presentation">Reset presentation</button></div>' + confirm + '</div></div>' +
+      '<ol class="runsheet">' + RUN.map(function (r, i) {
+        return '<li><span class="stepnum">' + (i + 1) + '</span><div class="stack-s"><span class="t">' + r.at + '</span><h3>' + esc(r.title) + '</h3><p class="say">"' + esc(r.say) + '"</p></div>' +
+          (r.act ? '<button class="btn btn-dark btn-s go" data-act="' + r.act + '" data-v="' + r.v + '">' + esc(r.btn) + '</button>' : '<span></span>') + '</li>';
+      }).join('') + '</ol>' +
+      '<div class="panel"><h2 style="font-size:1.1rem">Thabo\'s answers for a predictable run</h2><p class="small">Check-in: 12, 45, 20, 27, 56, 60, 3/8, 2/5. Practice: hint, then 8; then 6.</p>' +
+      '<p class="small muted">Naledi (all right): 15, 5, 4, 2/3, 20, 8. Sipho (fractions): 17, 12, 6, 4, 3/5, 3/5.</p></div></section>';
+  }
+
+  /* ---------- Settings ---------- */
+  function vSettings() {
+    var confirm = T.confirm === 'all'
+      ? '<div class="confirm" role="alert"><p>Delete every answer, the Passport records and all settings on this device?</p><div class="row">' +
+        '<button class="btn btn-danger btn-s" data-act="resetAll">Yes, reset everything</button><button class="btn btn-ghost btn-s" data-act="cancel">Cancel</button></div></div>'
+      : '';
+    var nDiag = MM.ITEMS.filter(function (i) { return i.use === 'diagnostic'; }).length;
+    return '<section class="stack"><div class="section-head"><span class="eyebrow">Settings</span><h1 tabindex="-1">Settings and reset</h1></div>' +
+      '<div class="two"><div class="stack">' +
+      '<div class="panel"><label for="lang"><b>Language for "Explain in my language"</b></label><select id="lang" data-act="lang">' +
+      Object.keys(LANGS).map(function (k) { return '<option value="' + k + '"' + (S.lang === k ? ' selected' : '') + '>' + LANGS[k] + '</option>'; }).join('') +
+      '</select><p class="small muted">isiZulu explanations are drafts for division, fractions and fractions of amounts. They still need checking by an isiZulu-speaking teacher. Other languages fall back to English.</p></div>' +
+      '<div class="panel"><label class="switch"><input type="checkbox" data-act="cues"' + (S.presenter ? ' checked' : '') + '> Presenter cues</label></div>' +
+      '<div class="panel"><h2 style="font-size:1.1rem">Reset the demo</h2><p class="small">Removes all answers and Passport records from this browser.</p>' +
+      '<div class="row"><button class="btn btn-danger btn-s" data-act="askReset" data-v="all">Reset demo</button></div>' + confirm + '</div></div>' +
+      '<div class="panel"><h2 style="font-size:1.1rem">Known limits of this version</h2><ul class="stack-s small" style="padding-left:1.1rem;margin:0">' +
+      '<li>Question bank: ' + nDiag + ' check-in and ' + (MM.ITEMS.length - nDiag) + ' practice questions for Grade 5. Every answer is checked by an automated test; a teacher review is still pending.</li>' +
+      '<li>Curriculum links to CAPS are provisional developer mappings, not yet checked against the official document.</li>' +
+      '<li>Mimi uses written, checked explanations. A live AI tutor needs a secure server and is coming later.</li>' +
+      '<li>Records live only in this browser. Clearing browser data removes them.</li>' +
+      '<li>Before any use with real learners, POPIA and parental consent requirements must be reviewed.</li>' +
+      '<li>Grades 4 and 6, printing the Passport, and more languages are coming later.</li></ul></div></div></section>';
+  }
+
+  /* ---------- Render and events ---------- */
+  var VIEWS = { welcome: vWelcome, learners: vLearners, home: vHome, check: vCheck, results: vResults, mimi: vMimi, passport: vPassport, teacher: vTeacher, present: vPresent, settings: vSettings };
+  var NAV = [['welcome', 'Home'], ['learners', 'Learners'], ['passport', 'Passport'], ['teacher', 'Teacher'], ['present', 'Present'], ['settings', 'Settings']];
+  var NAV_GROUP = { home: 'learners', check: 'learners', results: 'learners', mimi: 'learners' };
+
+  function render() {
+    var view = VIEWS[S.view] ? S.view : 'welcome';
+    var cur = NAV_GROUP[view] || view;
+    document.getElementById('nav').innerHTML = NAV.map(function (n) {
+      return '<button data-act="go" data-v="' + n[0] + '"' + (cur === n[0] ? ' aria-current="page"' : '') + '>' + n[1] + '</button>';
+    }).join('');
+    document.getElementById('pflag').hidden = !S.presenter;
+    var main = document.getElementById('app');
+    main.innerHTML = VIEWS[view]();
+    if (T.lastView !== view) {
+      T.lastView = view;
+      var h = main.querySelector('h1');
+      if (h && document.activeElement && document.activeElement !== document.body) { try { h.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }
+    }
+    if (T.focusInput) { T.focusInput = false; focusAnswer(); }
+    var nb = document.getElementById('nextBtn'); if (nb && T.fb) nb.focus();
+    var c = document.getElementById('chat'); if (c) c.scrollTop = c.scrollHeight;
+  }
+  function focusAnswer() { var i = document.getElementById('ans'); if (i) i.focus(); }
+
+  function pick(id) { S.learnerId = id; learner(id); }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]');
+    if (!b || b.disabled) return;
+    var act = b.getAttribute('data-act'), v = b.getAttribute('data-v');
+    if (b.tagName === 'SELECT' || (b.tagName === 'INPUT' && b.type === 'checkbox')) return;
+    switch (act) {
+      case 'go': go(v); break;
+      case 'pick': pick(v); go('home'); break;
+      case 'startCheck': pick(v); go('check'); break;
+      case 'passport': S.passportFor = v; go('passport'); break;
+      case 'choose': T.choice = v; render(); break;
+      case 'checkHint': {
+        var L = learner(), it = MM.currentItem(L.diag);
+        T.hints++; T.hintTexts.push(it.hints[T.hintTexts.length]);
+        logEvent(L, 'Asked for a hint on: ' + it.questionText, 'hint'); save(); render(); break;
+      }
+      case 'checkNext': T.fb = null; T.msg = null; render(); focusAnswer(); break;
+      case 'askClearLearner': T.confirm = 'learner'; render(); break;
+      case 'clearLearner': delete S.learners[S.learnerId]; T.confirm = null; T.fb = null; T.hintItem = null; save(); go('home'); break;
+      case 'askReset': T.confirm = v; render(); break;
+      case 'cancel': T.confirm = null; render(); break;
+      case 'resetPresentation':
+        S.learners = {}; S.learnerId = null; S.passportFor = null; S.timer = { running: false, startedAt: 0, elapsed: 0 };
+        T.fb = null; T.hintItem = null; T.confirm = null; save(); render(); break;
+      case 'resetAll': S = fresh(); T.fb = null; T.hintItem = null; T.confirm = null; save(); go('welcome'); break;
+      case 'timer':
+        if (S.timer.running) { S.timer.elapsed = elapsed(); S.timer.running = false; }
+        else { S.timer.running = true; S.timer.startedAt = Date.now(); }
+        save(); render(); break;
+      case 'timerReset': S.timer = { running: false, startedAt: 0, elapsed: 0 }; save(); render(); break;
+      default:
+        if (/^(t[A-Z]|tutor)/.test(act)) tutorAction(act);
+    }
+  });
+  document.addEventListener('change', function (e) {
+    var el = e.target, act = el.getAttribute && el.getAttribute('data-act');
+    if (act === 'lang') { S.lang = el.value; save(); }
+    if (act === 'cues') { S.presenter = el.checked; save(); render(); }
+  });
+  document.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target, raw = f.querySelector('#ans') ? f.querySelector('#ans').value : T.choice;
+    if (f.id === 'checkForm') {
+      var L = learner(), it = MM.currentItem(L.diag);
+      var r = MM.answerDiagnostic(L.diag, L.evidence, it.id, raw, T.hints);
+      if (!r.valid) { T.msg = r.message; render(); focusAnswer(); return; }
+      L.diag = r.diagnostic; L.evidence = r.evidence;
+      logEvent(L, 'Check-in · ' + it.questionText + ' → "' + r.entry.answer + '" (' + (r.result.correct ? 'correct' : 'not yet') + (T.hints ? ', with a hint' : '') + ')', r.result.correct ? 'right' : 'wrong');
+      if (L.diag.done) logEvent(L, 'Finished the check-in. Suggested next step: ' + MM.recommend(L.evidence).title, 'finish');
+      T.fb = { itemId: it.id, correct: r.result.correct, hints: T.hints, given: r.entry.answer };
+      T.msg = null; T.choice = null;
+      save(); render();
+    } else if (f.id === 'tutorForm') {
+      submitTutor(raw);
+    }
+  });
+  setInterval(function () {
+    var el = document.getElementById('timer');
+    if (el && S.timer.running) { var ms = elapsed(); el.textContent = fmt(ms); el.classList.toggle('late', ms > 300000); }
+  }, 500);
+
+  window.MMApp = { state: function () { return S; } };
+  render();
+})();
+
+</script>
+
+</body>
+</html>
